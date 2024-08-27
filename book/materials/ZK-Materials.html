@@ -1,0 +1,953 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ZK Materials - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="materials/ZK-Materials.md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
+        <link rel="stylesheet" href="../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../halo2/chap-0/index.html">1-basic concepts</a></li><li class="chapter-item "><a href="../halo2/chap-1/index.html">2-simple-circuit</a></li><li class="chapter-item "><a href="../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item "><a href="../halo2/chap-4/index.html">5-range-check</a></li><li class="chapter-item "><a href="../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item "><a href="../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../halo2/tmp/1-Simple-Example.html">1-Simple Examples</a></li><li class="chapter-item "><a href="../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item "><a href="../halo2/tmp/6-Range-Check(code-explanation).html">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../materials/ZK-Materials.html" class="active">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/materials/ZK-Materials.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<ul>
+<li>Last update: 2023-10-23 [^1]</li>
+<li>📢 Feel free to contribute!  Pls fork <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io">zkp-co-learning.github.io</a> and PR!</li>
+<li>PS: In each title’s Content Block, the top part is newer, below is older.</li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="#zkp-building-blocks">ZKP building blocks</a>
+<ul>
+<li><a href="#cryptography">Cryptography</a></li>
+<li><a href="#math">Math.</a></li>
+<li><a href="#rust">Rust</a></li>
+</ul>
+</li>
+<li><a href="#zkp-basics-tutorials">ZKP Basics Tutorials</a>
+<ul>
+<li><a href="#awesome-zkp">Awesome ZKP</a></li>
+</ul>
+</li>
+<li><a href="#nova--folding-schemes">Nova / Folding schemes</a></li>
+<li><a href="#halo2">Halo2</a></li>
+<li><a href="#stark">STARK</a></li>
+<li><a href="#zkml">ZKML</a></li>
+<li><a href="#zkvm">zkVM</a></li>
+<li><a href="#cutting-edge">cutting-edge</a>
+<ul>
+<li><a href="#lattice">Lattice</a></li>
+<li><a href="#quantum">Quantum</a></li>
+</ul>
+</li>
+<li><a href="#zk-applications">ZK Applications</a>
+<ul>
+<li><a href="#zk-email">ZK Email</a></li>
+<li><a href="#zkwasm">zkWASM</a></li>
+<li><a href="#pse">PSE</a></li>
+</ul>
+</li>
+<li><a href="#tricks--tools">Tricks &amp; Tools</a></li>
+<li><a href="#books--websites--podcasts">books &amp; websites &amp; Podcasts..🎙📚</a>
+<ul>
+<li><a href="#zkp-info-flow">zkp info flow</a></li>
+</ul>
+</li>
+<li><a href="#interdisciplinarityeg-ai">Interdisciplinarity(e.g. AI)</a></li>
+<li><a href="#others-cant-archive">Others (can’t archive)</a></li>
+<li><a href="#zkp-qa">zkp QA</a></li>
+</ul>
+<h1 id="zkp-building-blocks"><a class="header" href="#zkp-building-blocks">ZKP building blocks</a></h1>
+<h2 id="cryptography"><a class="header" href="#cryptography">Cryptography</a></h2>
+<p>《公钥密码学研究方法论》[https://documents.uow.edu.au/~fuchun/methodology.html]</p>
+<ul>
+<li>
+<p>这是 slides，这是最新的本体： [https://eprint.iacr.org/2023/715</p>
+</li>
+<li>
+<p>密码学纯理论进展速度也同样相当的惊人，</p>
+</li>
+<li>
+<p>清华毕业的Yanyi Liu跟着Rafael Pass 揪着OWF不放疯狂输出，试图彻底搞清楚密码学的复杂性理论基础。</p>
+</li>
+<li>
+<p>Yilei Chen回国后负责清华姚班的Cryptography课 http://www.chenyilei.net/cryptography-s2023.html， 下一代姚班选手的ZKP就都是他教的了，他在FS要不要密码学哈希，iO/lattice方面也有很多工作。</p>
+</li>
+<li>
+<p>Lijie Chen就更不用说了，华人TCS之光，博士论文写了551页https://www.mit.edu/~lijieche/Lijie-Chen-thesis.pdf，已经是average-case hardness 和 derandomization领域世界级的专家了，可以去预测哪年得图灵奖了。</p>
+</li>
+</ul>
+<p><strong>Curves</strong></p>
+<ul>
+<li><a href="https://electriccoin.co/blog/the-pasta-curves-for-halo-2-and-beyond/">The Pasta Curves for Halo 2 and Beyond</a></li>
+<li><a href="https://o1-labs.github.io/proof-systems/specs/pasta.html">Mina Book: Pasta Curves</a></li>
+<li><a href="https://medium.com/asecuritysite-when-bob-met-alice/pallas-and-elliptic-curves-f34115904b02">Pallas and Elliptic Curves</a></li>
+<li><a href="https://eprint.iacr.org/2022/586.pdf">A survey of elliptic curves for proof systems</a></li>
+<li><a href="https://eprint.iacr.org/2022/1662.pdf">Revisiting cycles of pairing-friendly elliptic curves</a></li>
+<li><a href="https://eprint.iacr.org/2022/1162.pdf">Pairings in Rank-1 Constraint Systems</a></li>
+<li>https://github.com/zcash/pasta_curves</li>
+<li>https://hackage.haskell.org/package/pasta-curves-0.0.1.0/docs/PastaCurves.html</li>
+<li>https://github.com/nccgroup/pasta-curves</li>
+<li>https://docs.rs/ark-pallas/0.3.0/ark_pallas/</li>
+</ul>
+<h2 id="math"><a class="header" href="#math">Math.</a></h2>
+<p>Probability and Measure https://www.youtube.com/playlist?list=PL0vEWJI_pj7RZ51zecINlzWxpFv83r8RE
+还有这个，我快看完了，超喜欢</p>
+<ul>
+<li>
+<p>Abstract Algebra I (full course) https://www.youtube.com/playlist?list=PL1r259iKOz-lJ0TjURlrUVASXQimpWAS5</p>
+</li>
+<li>
+<p><a href="https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra">The-Art-of-Linear-Algebra</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=B1J6Ou4q8vE">Animation vs. Math</a></p>
+</li>
+</ul>
+<p><a href="https://angeris.github.io/papers/zk-linalg.pdf">Succinct Proofs and Linear Algebra</a></p>
+<p>数学 :</p>
+<ul>
+<li>参考学习内容:多项式乘法和除法、拉格朗日插值、Schwartz-Zip-pel 引理、快速傅立叶变换(FFT) 、NTT、MSM 以及 Field extension等。</li>
+<li>An Introduction to Mathematical Cryptography</li>
+<li>https://explained-from-first-principles.com/number-theory 这个介绍数论的也不错</li>
+</ul>
+<p>初等数论和群论 :</p>
+<ul>
+<li>推荐了 MIT’s 6.875 (Foundations of Cryptography) ，对于国内的同学来讲，建议结合潘承洞版的看，会更好！ 教材链接：<a href="https://t.co/kfIc1fO7gV">https://mit6875.github.io/HANDOUTS/numbertheory.pdf</a></li>
+</ul>
+<h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
+<p>https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter yeah, a Jupyter kernel for Rust</p>
+<pre><code class="language-bash">cargo install evcxr_jupyter
+evcxr_jupyter --install
+jupyter lab
+</code></pre>
+<h1 id="zkp-basics-tutorials"><a class="header" href="#zkp-basics-tutorials">ZKP Basics Tutorials</a></h1>
+<p>这个课也值得跟上：
+PSE Lectures - A full course on Elliptic Curve Cryptography
+https://www.youtube.com/playlist?list=PLV91V4b0yVqQ_inAjuIB5SwBNyYmA9S6M</p>
+<p>新火公开课 https://space.bilibili.com/3493266041342842/channel/series
+钟博的课</p>
+<ul>
+<li>https://www.rareskills.io/zk-bootcamp</li>
+<li>https://zkhack.dev/whiteboard/ 挺适合作为基础资料的</li>
+<li>https://www.rareskills.io/zk-book</li>
+</ul>
+<p>I try not to recommend too many sources, since everyone learns differently. But here are a few:</p>
+<ul>
+<li>
+<p>Least Authority’s <a href="https://leastauthority.com/community-matters/moonmath-manual/">Moonmath manual</a> for learning Snarks. Starts with the basics.</p>
+</li>
+<li>
+<p>For learning about Starks, StarkWare’s <a href="https://starkware.co/stark-101/">Stark 101 series</a>.</p>
+</li>
+<li>
+<p>For writing some ZK code and seeing what actually happens: <a href="https://docs.aztec.network/noir">Noir from Aztec</a></p>
+</li>
+<li>
+<p>a16z 整理的比较全的 ZKP 的资料库  https://a16zcrypto.com/zero-knowledge-canon/</p>
+</li>
+<li>
+<p>ZK 零知识: https://buidlerdao.notion.site/ZK-5963083942a744bbb60a0328008868e2</p>
+</li>
+<li>
+<p>零基础学习 ZK:  https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4</p>
+</li>
+<li>
+<p>万字长文捕获 ZK Rollup 时代价值｜ZONFF Research: https://mp.weixin.qq.com/s/5zKdS-GL8w_z4XIDOjv7FA</p>
+</li>
+<li>
+<p><a href="https://github.com/matter-labs/zksync-era">zksync开源</a></p>
+</li>
+</ul>
+<p>怎么零基础学习零知识证明:</p>
+<ul>
+<li>https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4</li>
+</ul>
+<h2 id="awesome-zkp"><a class="header" href="#awesome-zkp"><a href="https://github.com/matter-labs/awesome-zero-knowledge-proofs">Awesome ZKP</a></a></h2>
+<ul>
+<li><a href="https://github.com/noir-lang/awesome-noir">Awesome Noir</a></li>
+<li><a href="https://github.com/arnaucube/awesome-circom">Awesome Circom</a></li>
+<li><a href="https://github.com/howardwu/awesome-aleo">Awesome Aleo</a></li>
+<li><a href="https://github.com/auditless/awesome-cairo">Awesome Cairo</a></li>
+<li><a href="https://github.com/lurk-lab/awesome-folding">Awesome-Folding</a></li>
+<li><a href="https://github.com/adria0/awesome-halo2">Awesome HALO2</a></li>
+<li><a href="https://github.com/fluidex/awesome-plonk">Awesome PLONK</a></li>
+<li><a href="https://github.com/worldcoin/awesome-zkml">Awesome ZKML</a></li>
+<li><a href="https://github.com/LuozhuZhang/awesome-zkevm">Awesome zkEVM</a></li>
+<li><a href="https://github.com/ventali/awesome-zk">Awesome Zero Knowledge</a></li>
+</ul>
+<h1 id="nova--folding-schemes"><a class="header" href="#nova--folding-schemes">Nova / Folding schemes</a></h1>
+<p>nova 写的五子棋: https://www.zkconnect4.dev/</p>
+<p>Nova 项目: https://github.com/microsoft/Nova/network/dependents</p>
+<p>A Brief History of Folding Schemes https://arc.net/e/2831196C-9575-47A6-966E-B34DB840168E</p>
+<ul>
+<li>Bootleproof-type IPA是「folding 前史」的一章</li>
+</ul>
+<p>https://nova-browser-ecdsa-web.vercel.app/</p>
+<p>Folding with ProtoGalaxy - Liam Eagen https://www.youtube.com/watch?v=SpkTvRia1EA</p>
+<ul>
+<li><a href="https://huobi-ventures.medium.com/nova-a-new-chapter-in-zero-knowledge-proofs-108110cd816e">Nova: A New Chapter in Zero-Knowledge Proofs</a>  (medium这糟糕的排版)</li>
+</ul>
+<p>Benchmark on recursion Plonky vs Nova https://github.com/nikkolasg/recursive-bench</p>
+<p>白菜: 有对NOVA-ML 感兴趣的不，这个课题可能比较大，可以考虑组个支队了 😂</p>
+<ul>
+<li>https://github.com/socathie/nova-ml</li>
+<li>awesome-zkml : https://github.com/worldcoin/awesome-zkml</li>
+<li>Team Novi (Nova):  https://0xparc.notion.site/Team-Novi-2d81bc06b0aa4c99b61a9ee06166b3b6</li>
+<li>risc0-nova
+<ul>
+<li>https://github.com/hero78119/risc0-nova</li>
+</ul>
+</li>
+<li><a href="https://hackmd.io/@9MPvD9czTQS18zEjAERVAg/Hy-vKK04h">Parallelizing Nova</a></li>
+<li><a href="https://huobi-ventures.medium.com/nova-a-new-chapter-in-zero-knowledge-proofs-108110cd816e">Nova: A New Chapter in Zero-Knowledge Proofs</a>  (medium这糟糕的排版)</li>
+</ul>
+<h1 id="halo2"><a class="header" href="#halo2">Halo2</a></h1>
+<p>https://github.com/CPerezz/halo2_sumcheck 👀</p>
+<p>https://github.com/axiom-crypto/halo2-wasm</p>
+<p>https://github.com/zkCert/halo2-zkcert</p>
+<p><a href="https://0xparc.notion.site/Course-Recordings-Slides-and-Notes-90d0ddb5f9ee49f7a244dbbe60d563ff#549d7b6081e1412a96ac8951dddf9e75">0xPARC Course Recordings, Slides, and Notes</a></p>
+<p>Taiko: https://github.com/taikoxyz/circuit-tools/tree/main</p>
+<ul>
+<li>我们从 PSE 的 zkevm 里抽象出了一个 sdk，大家如果想用 halo2 开发可以试下 [Grin] 欢迎给我提 issue</li>
+</ul>
+<p>solidity verifier: https://github.com/privacy-scaling-explorations/halo2-solidity-verifier/pulls</p>
+<p>halo2 tinyram  https://github.com/Orbis-Tertius/tiny-ram-halo2</p>
+<ul>
+<li>Poseidon: https://github.com/zcash/halo2/blob/main/halo2_gadgets/src/poseidon/pow5.rs</li>
+<li>proof of validator: https://github.com/asn-d6/halo2-merkle-tree-ipa-bench</li>
+<li>social recovery: https://hackmd.io/@Nerolation/H1BvRWg02</li>
+</ul>
+<p>axiom 的 open source program</p>
+<hr />
+<p>使用了 halo2 的 Applications:</p>
+<ul>
+<li>ZK Email https://github.com/zkemail  halo2</li>
+<li>ZK Wordle: https://zordle.xyz/  halo2</li>
+<li>Hammster： https://github.com/ytham/hammster  halo2</li>
+<li>zk-draw : Verifiable random draw with zero-knowledge of the random seed https://github.com/jae-cuz/zk-draw   halo2</li>
+<li>ZK Microphone: https://github.com/Miyamura80/ZKMicrophone</li>
+<li><a href="https://medium.com/@yujiangtham/building-a-zero-knowledge-web-app-with-halo-2-and-wasm-part-1-80858c8d16ee">Building a Zero Knowledge web app with Halo 2 and Wasm (part 1)</a></li>
+<li>zk-img: Fighting Deepfakes with Zero-Knowledge Proofs   https://medium.com/@danieldkang/zk-img-fighting-deepfakes-with-zero-knowledge-proofs-9b76c23e3789  尚未开源</li>
+</ul>
+<p>大部分由 @Kurt Pan 博士整理</p>
+<h1 id="stark"><a class="header" href="#stark">STARK</a></h1>
+<p>深入探索STARK的安全性和可靠性——STARKs全面安全分析 https://blog.csdn.net/mutourend/article/details/133821797</p>
+<ul>
+<li>
+<p><a href="imgs/A%20Walk-Through%20of%20a%20Simple%20zk-STARK%20Proof.pdf">A Walk-Through of a Simple zk-STARK Proof</a></p>
+</li>
+<li>
+<p>Boojum：zkSync的高性能去中心化STARK证明系统 https://blog.csdn.net/mutourend/article/details/131770996</p>
+</li>
+<li>
+<p>一个非常简洁的stark介绍，比vitalik版本更加适合初学者:</p>
+<ul>
+<li>Zero Knowledge Virtual Machine step by step https://eprint.iacr.org/2023/1032.pdf</li>
+</ul>
+</li>
+<li>
+<p>https://github.com/aszepieniec/stark-brainfuck/blob/master/docs/engine.md</p>
+<ul>
+<li>老外写个一个简单版本的zkvm，不过是基于stark的</li>
+<li>并且也配有文档，适合研究基于stark zkvm的原理理解。</li>
+</ul>
+</li>
+</ul>
+<p>@0xhhh: 总结了下 Stark的一些资料，很多来自于@Kurt Pan ，感谢潘老师:</p>
+<ul>
+<li>https://www.notion.so/Stark-Cannon-0801f24ea9e543449e015bf4063bb71d?pvs=4</li>
+<li>https://literate-wolfsbane-bf0.notion.site/Stark-Cannon-0801f24ea9e543449e015bf4063bb71d?pvs=4</li>
+</ul>
+<p>Kurt Pan :
+https://github.com/erhant/zkbrainfuck A Brainfuck zkVM with Circom.</p>
+<p>https://starkware.co/stark-101/ @Frank Jz Liu 推荐，亲测很不错</p>
+<p>再推荐这几个，你可以去整理一下：
+https://aszepieniec.github.io/stark-anatomy/
+https://aszepieniec.github.io/stark-brainfuck/
+https://github.com/facebook/winterfell
+https://github.com/lambdaclass
+https://github.com/andrewmilson/ministark/</p>
+<ul>
+<li>https://github.com/aszepieniec/stark-brainfuck/blob/master/docs/engine.md
+<ul>
+<li>老外写个一个简单版本的zkvm，不过是基于stark的</li>
+<li>并且也配有文档，适合研究基于stark zkvm的原理理解。</li>
+</ul>
+</li>
+</ul>
+<p>实现一个 Baby Snark</p>
+<ul>
+<li>可以参考 https://github.com/initc3/babySNARK 。可以看到Andrew Miller，Ye Zhang这些大佬几年前也是这么一步步成长起来的</li>
+</ul>
+<hr />
+<p>@Maxlion🦁 提供：</p>
+<p>Cairo 环境配置➕ERC 实现（Cairo1）
+https://starknetastro.xlog.app/Starknet_Shanghai_Workshop_DAY1</p>
+<p>Cairo 语言中文文档
+https://book.cairo-lang.org/zh-cn/index.html</p>
+<p>开发工具版本号推荐
+湘_Xiang 版本
+https://w3hitchhiker.notion.site/Starknet-cc07119ed57648faa92f7630219225b3?pvs=4
+鸦_Cryptonerdcn 版本
+https://docs.google.com/document/d/1ehBfE2CBeVL9rDhSc_JiUtxZJKWVKl8A6o1f1Ee0X4M/mobilebasic</p>
+<p>[Cairo合约示例]
+Nethermind 版
+https://starknet-by-example.voyager.online/
+LambdaClass 版
+https://cairo-by-example.com/
+OpenZeppelin 版
+https://github.com/OpenZeppelin/cairo-contracts/tree/cairo-2</p>
+<p>Starknet 文档
+https://book.starknet.io/</p>
+<p>Starknet 基金会给 Astro 社区开发者的答疑文档
+https://docs.google.com/document/d/1ku_y4M9PUe_GcwiBlvq6Kz2LkagyXD2Za1XCZj-IHVo/mobilebasic</p>
+<p>Starknet 中文知识库(生态向)
+https://starknet-astro.super.site/</p>
+<h1 id="zkml"><a class="header" href="#zkml">ZKML</a></h1>
+<p><a href="https://github.com/lyronctk/zator">Zator: Verified inference of a 512-layer neural network using recursive SNARKs</a>v</p>
+<p>TensorPlonk: A “GPU” for ZKML, Delivering 1,000x Speedups https://medium.com/@danieldkang/tensorplonk-a-gpu-for-zkml-delivering-1-000x-speedups-d1ab0ad27e1c</p>
+<ul>
+<li>https://github.com/worldcoin/awesome-zkml</li>
+<li>https://github.com/socathie/circomlib-ml</li>
+<li>https://github.com/socathie/nova-ml</li>
+<li>https://github.com/lyronctk/zator</li>
+</ul>
+<p>ZKML slides： https://www.canva.com/design/DAFi3o7FiR4/d9LMeacr6QQwYy9C0BQHgA/view</p>
+<p>这篇 ZKML 文章很顶:  https://mirror.xyz/sevenxventures.eth/3USbrj7kcK7lyq_7upA4iyWV5pWMII7KrM40z5zpEXo</p>
+<h1 id="zkvm"><a class="header" href="#zkvm">zkVM</a></h1>
+<p>https://github.com/vacp2p/zk-explorations</p>
+<ul>
+<li>对不同 lib 和 algo 实现的 VM 做的性能测试 benchmark</li>
+</ul>
+<p>发现了asz有好多好东西啊，stark很好的学习资料 https://github.com/aszepieniec/stark-anatomy</p>
+<p>下一期共学STARK+zkVM的资料</p>
+<p>https://neptune.cash/
+<a href="https://mp.weixin.qq.com/s/nBfL0MzqzOxGlSZgw6I85Q">STARK 算法解析（第 6 部分: 加速整个流程）</a>
+https://asz.ink/alan-szepieniec/ he is an advisor to Nervos Foundation.
+https://neptune.cash/
+https://neptune.cash/learn/brainfuck-tutorial/</p>
+<ul>
+<li>snarkVM: Aleo 已经把 Marlin 更新成 Varuna 了 <a href="https://github.com/AleoHQ/snarkVM/tree/testnet3/algorithms/src/snark/varuna">varuna</a></li>
+</ul>
+<p><a href="https://eprint.iacr.org/2023/1032.pdf">徒手写 zkVM  - https://eprint.iacr.org/2023/1032.pdf</a></p>
+<ul>
+<li>
+<p>ZERO KNOWLEDGE VIRTUAL MACHINE STEP BY STEP</p>
+</li>
+<li>
+<p>稍微比较偏理论</p>
+</li>
+<li>
+<p>https://github.com/aszepieniec/stark-brainfuck/blob/master/docs/engine.md</p>
+<ul>
+<li>老外写个一个简单版本的zkvm，不过是基于stark的</li>
+<li>并且也配有文档，适合研究基于stark zkvm的原理理解。</li>
+</ul>
+</li>
+</ul>
+<p>另外他去年一篇zkvm的概览，对理解zkvm的设计还是很棒的。
+他是指 https://aszepieniec.github.io/stark-brainfuck/ 的作者？</p>
+<ul>
+<li>基本的输入输出，内存等。我一直认为那个教程就是最好的zkvm入门的。</li>
+</ul>
+<p>https://github.com/cryptape/ckb-bf-zkvm
+秘猿 A BrainFuck zkVM implementation on CKB, using Halo2.
+一个只有几条指令的 vm 机器</p>
+<ul>
+<li>snarkVM有啊，Aleo家的就是 https://github.com/AleoHQ/snarkVM。没记错底层proof sys用的Marlin。
+<ul>
+<li>可能program execution是面向冯诺伊曼架构RAM模型，而AIR相比于电路抽象层次更高，设计STARK VM更直接，所以大多数项目会这么选吧。</li>
+<li>不过zkEVM都用SNARK堆出来了，同样的工程师去堆一个自定义ISA的VM对他们来说应该是个simpler task吧</li>
+</ul>
+</li>
+</ul>
+<p>Nova VM 来了, 看不过来了。。。。</p>
+<ul>
+<li><a href="https://zkresear.ch/t/towards-a-nova-based-zk-vm/105">Towards a Nova-based ZK VM</a></li>
+</ul>
+<p>我在找一个write a vm from scratch的课程</p>
+<ul>
+<li>要是只是vm不要求zkvm那就太多了，比如5天前的这篇 https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/</li>
+</ul>
+<p><img src="../%E6%9C%AA%E5%91%BD%E5%90%8D/ZK-Materials_image_1.jpg" alt="" />
+上周测试了一下 PSE evm circuit，生成的 raw proof 用 evm 验证需要大约 4000万+ gas。（本地调高了 block gas limit）
+也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升</p>
+<p>chunk proof 里面包涵了 2次压缩，还是做了不少的工作</p>
+<p><img src="../%E6%9C%AA%E5%91%BD%E5%90%8D/ZK-Materials_image_2.jpg" alt="" /></p>
+<p>不太确定上面的代码是不是具体的电路，看了下感觉没多少行。[Facepalm]</p>
+<p>zkevm super circuit 的 column 太多了，应该超过了 1000 个。
+chunk 和 aggregation 的 column 少了很多，但是应该像 Frank 所说，电路 “平铺”在聚合电路里。不知道他们怎么优化到 40万 gas 的，这个水平已经和 circom 差不多了</p>
+<h1 id="cutting-edge"><a class="header" href="#cutting-edge">cutting-edge</a></h1>
+<h2 id="lattice"><a class="header" href="#lattice">Lattice</a></h2>
+<p>Lattice-based cryptography: The tricky math of dots https://www.youtube.com/watch?v=QDdOoYdb748&amp;list=PLMItfTVgwEAvTX4-sZkcF5s3-l1JDocY0&amp;index=4</p>
+<h2 id="quantum"><a class="header" href="#quantum">Quantum</a></h2>
+<p><a href="https://signal.org/blog/pqxdh/">Quantum Resistance and the Signal Protocol</a></p>
+<ul>
+<li>Signal 已经集成 Kyber了</li>
+</ul>
+<h1 id="zk-applications"><a class="header" href="#zk-applications">ZK Applications</a></h1>
+<h2 id="zk-email"><a class="header" href="#zk-email">ZK Email</a></h2>
+<p>最近有进展，确实值得研究：ZK Email https://github.com/zkemail</p>
+<p>ZK Proof of Email：通往decentralized identity之路 https://blog.csdn.net/mutourend/article/details/129004763?ops_request_misc=&amp;request_id=2425a5a6d21c4b6bbe440828ba478ccf&amp;biz_id=</p>
+<h2 id="zkwasm"><a class="header" href="#zkwasm">zkWASM</a></h2>
+<p><a href="https://forum.polkadot.network/t/exploring-alternatives-to-wasm-for-smart-contracts/2434/21">Exploring alternatives to WASM for smart contracts</a></p>
+<p>一个华人团队搞的 zkwasm</p>
+<ul>
+<li>
+<p>https://github.com/DelphinusLab/zkWasm</p>
+</li>
+<li>
+<p>另一个zkwasm - supernova, 估计9-10月发布</p>
+<ul>
+<li>https://twitter.com/powdr_labs/status/1679822931340173313</li>
+<li>https://twitter.com/HoumanShadab/status/1679155719805755392</li>
+</ul>
+</li>
+</ul>
+<pre><code>【zkwasm 分享总结】： 
+程序泡在 webassembly 的 bytecode 里面。是一个 webassenmbly 的小程序。
+不分链游的问题：游戏运行的结果有可能作弊，不知道你是怎么运行这个程序的，有可能你上传了一些裸数据。 所以仍依靠中心化的服务器
+
+会在跑 webassembly 的时候跑一个，监听用户事件，产生输入输出的 sequence，把他编译成一个 webassembly 的文件。每个操作带来的 consequence 会被管控的，把 proof 上链。
+
+how to generate proof：
+- Prover 实例
+- 不用每次都和链上交互（gas 太高），可以把本次所有的行动都压成一个 proof。
+
+https://github.com/DelphinusLab/zkWasm
+
+如果想 onchain Verify，需要 Deploy 一个测试合约
+
+合约生成，prove 加速：
+- https://github.com/DelphinusLab/continuation-batcher
+
+https://hackmd.io/@sinka/BJUIyufEc
+
+后续：模块化公开课
+</code></pre>
+<h2 id="pse"><a class="header" href="#pse"><strong>PSE</strong></a></h2>
+<p>From CEX to CCEX with Summa
+https://mirror.xyz/privacy-scaling-explorations.eth/_1Y6ExFD_Rs3oDxwx5_kWAj_Tl_L9c0Hm7E6SVJei0A</p>
+<p>https://mirror.xyz/privacy-scaling-explorations.eth/f2ZfkPXZpvc6DUmG5-SyLjjYf78bcOcFeiJX2tb2hS0</p>
+<p>PSE Lectures - Ep 6 https://www.youtube.com/watch?v=l7bEN1V7qRM</p>
+<ul>
+<li><a href="%5Bhttps://docs.google.com/presentation/d/1zXAsGyyq_DZ2WdGjCow3cP0TVhTxkfRaa3q3Rz6z4U4/edit#slide=id.g1e4808542a4_1_17%5D(https://docs.google.com/presentation/d/1zXAsGyyq_DZ2WdGjCow3cP0TVhTxkfRaa3q3Rz6z4U4/edit#slide=id.g1e4808542a4_1_17)">Meeting PSE Slides</a></li>
+<li>PSE Projects List : https://www.appliedzkp.org/projects</li>
+<li>Make your first contribution to any open-source Web3 project : <a href="https://www.useweb3.xyz/contribute">https://www.useweb3.xyz/contribute</a></li>
+<li>LIST： <a href="https://www.appliedzkp.org/projects">https://www.appliedzkp.org/projects</a></li>
+</ul>
+<p>Some Project Boards:</p>
+<ul>
+<li><a href="https://github.com/orgs/semaphore-protocol/projects/10">https://github.com/orgs/semaphore-protocol/projects/10</a></li>
+<li><a href="https://github.com/orgs/privacy-scaling-explorations/projects/3/views/9">https://github.com/orgs/privacy-scaling-explorations/projects/3/views/9</a></li>
+</ul>
+<p><strong>Proof of Innocence（清白证明）：</strong></p>
+<ul>
+<li><a href="https://github.com/chainwayxyz/proof-of-innocence">https://github.com/chainwayxyz/proof-of-innocence</a></li>
+<li>Twitter : Follow @drCathieSo_eth  @AndyGuzmanEth</li>
+</ul>
+<h1 id="tricks--tools"><a class="header" href="#tricks--tools">Tricks &amp; Tools</a></h1>
+<p>https://github.com/joelparkerhenderson/sha256-sentence</p>
+<ul>
+<li>The SHA256 for this sentence begins with seven, seven, f, zero, a, b, b and five.</li>
+<li>The SHA256 hash of this message begins with 534d765</li>
+<li>我去，厉害了,主要是里面没有什么随机数</li>
+</ul>
+<p>https://zkbench.dev/
+trade-offs and performance of different frameworks.</p>
+<p><a href="https://zkvalidator.com/a-survey-of-zk-languages/">A survey of ZK Languages</a></p>
+<h1 id="books--websites--podcasts"><a class="header" href="#books--websites--podcasts">books &amp; websites &amp; Podcasts..🎙📚</a></h1>
+<p>https://blog.lambdaclass.com/ 要经常看</p>
+<p>https://blog.csdn.net/mutourend – 简中唯一zkp-complete博客[Grin]</p>
+<ul>
+<li>
+<p>订阅下 mutourend 邹老师的csdn，这技术热点追踪翻译速度才叫快，“区块链媒体”们望尘莫及😂</p>
+</li>
+<li>
+<p>去年出版的《哥德尔传》 <a href="https://book.douban.com/subject/36073022/">https://book.douban.com/subject/36073022/</a> 是我近些年读到写得最好的传记，</p>
+</li>
+<li>
+<p>仅次于我十年前读到的《维特根斯坦传》 <a href="https://book.douban.com/subject/6152040/">https://book.douban.com/subject/6152040/</a> （这是不可能被撼动的第一传记神作）</p>
+</li>
+<li>
+<p><a href="imgs/ZK-Materials_pdf_1.pdf">The arithmetic of pairing-based proof systems</a></p>
+</li>
+</ul>
+<p>三本叙事书籍 : pnp / tns / cw</p>
+<ul>
+<li><a href="./imgs/pnp.pdf">p ?= np</a></li>
+<li><a href="./imgs/cw.pdf">Crypto Wars</a></li>
+<li><a href="./imgs/The-network-state.pdf">The network state</a></li>
+</ul>
+<p>https://cryptography.rs/
+这个页面很全也很漂亮，我cryptography.land也是受这里启发</p>
+<p>刚才CJ还提到了这个网站 https://asecuritysite.com/ ，我也经常看这个，可以感到这个教授对密码学是真爱，做得非常全面且扎实</p>
+<hr />
+<p>🎙
+老牌密码学播客 ： Security Cryptography Whatever https://securitycryptographywhatever.com/
+<a href="https://zeroknowledge.fm/288-2/">Episode 288: Quantum Cryptography with Or Sattath</a></p>
+<h2 id="zkp-info-flow"><a class="header" href="#zkp-info-flow">zkp info flow</a></h2>
+<p>https://twitter.com/i/spaces/1ynJOaMnBlOKR</p>
+<ul>
+<li><a href="./imgs/202309201217-zkp-twitter-space.pdf">zkp twitter space 202309201217 </a>
+https://www.proofoftrack.xyz/
+还有Suning的newsletter，小伙子精力旺盛，新link整理得很快</li>
+</ul>
+<p>郭老师推： https://twitter.com/1dot2
+邹老师博： https://blog.csdn.net/mutourend
+论文看我的这个： https://zk.cryptography.land/
+zkmesh: https://zkmesh.substack.com/
+自定义Twitter Threads：比如我这个 https://twitter.com/i/lists/1522499398210531329
+项目方的博客（这个很多，看几篇看对不对胃口，调整）
+Youtube：PSE/a16z/Eth Global etc
+podcast: https://zeroknowledge.fm/</p>
+<p>以上所有内容（包括Twitter List）均可RSS订阅，且建议使用RSS订阅</p>
+<p>项目程序一手信息几乎唯一的选择：Github
+论文的话 https://eprint.iacr.org/
+又想起来这个重要的标准化组织（很少被提起但里面有好东西）： https://zkproof.org/
+比如  https://docs.zkproof.org/presentations
+沙漏老师的feed : https://github.com/PrimitivesLane/PrimitivesFeed
+一个中科院数学所的学生做的密码学链接聚合网  https://link.fffmath.com/
+泛web3终极聚合器RAW： https://twitter.com/nake13/status/1526852356402745346</p>
+<p>forum:
+https://ethresear.ch/
+https://zkresear.ch/</p>
+<h1 id="interdisciplinarityeg-ai"><a class="header" href="#interdisciplinarityeg-ai">Interdisciplinarity(e.g. AI)</a></h1>
+<p>AI:</p>
+<ul>
+<li><a href="https://github.com/fastai/lm-hackers/blob/main/lm-hackers.ipynb">A hacker’s guide to Language Models(1)</a></li>
+<li><a href="https://www.youtube.com/watch?v=jkrNMKz9pWU">A hacker’s guide to Language Models(2)</a></li>
+</ul>
+<h1 id="others-cant-archive"><a class="header" href="#others-cant-archive">Others (can’t archive)</a></h1>
+<p>当时逐字听译的一个 Brendan 的 talk: Plonky2 简介 https://mp.weixin.qq.com/s/qSWFLQPQJvWHclAvlEXEaQ</p>
+<p>Q: 我想知道 这个 recursive 实际能跑起来的例子哪里有[Lol]
+A:  Plonky2-based的吗？olavm肯定能实际跑起来 https://github.com/Sin7Y/olavm</p>
+<p><a href="https://www.usenix.org/conference/usenixsecurity23/presentation/chiesa">Eos: Efficient Private Delegation of zkSNARK Provers</a></p>
+<p>Lurk Beta 估计还得半年以上 https://github.com/lurk-lab/lurk-rs/issues/657</p>
+<p>ABCDE ZK Hacker Camp |【Session 8: Efficient Zero-KnowledgeProofs: Theory and Practice】 https://www.youtube.com/watch?v=j2_9nwgfhEw</p>
+<ul>
+<li>https://anoma.github.io/VampIR-Book/</li>
+<li>zk 摩尔定律: <a href="https://zkintro.com/">zkintro</a></li>
+<li>@Qi Zhou : 话说，我们在做zkWASM的Cannon，也计划用各种foding + aggregate的方案，感兴趣的小伙伴可以报名😄</li>
+<li>risc0-nova
+<ul>
+<li>https://github.com/hero78119/risc0-nova</li>
+</ul>
+</li>
+<li>zkGeth, 看起来是把 geth 转化成risv64指令集，然后做一个zkrisc出来。
+<ul>
+<li>https://hackmd.io/@HqESr6_rQbmdCj2v03vrcQ/HyMA2pkmh</li>
+</ul>
+</li>
+<li>Towards a Nova-based ZK VM 的作者开始写的新书 :
+<ul>
+<li><a href="https://zkintro.com/">zkintro</a></li>
+</ul>
+</li>
+</ul>
+<p>网上有比较好的用bellperson或者bellman写 zkp的例子吗？</p>
+<ul>
+<li>
+<p>具体一点 我觉得lurk的Poseidon 实现里有不错可以借鉴的 https://github.com/lurk-lab/neptune/blob/main/src/sponge/circuit.rs</p>
+</li>
+<li>
+<p>因为Nova用的是relaxed r1cs所以你也可以直接参考nova的examples比如 https://github.com/microsoft/Nova/blob/main/examples/minroot.rs , Constraint 部分都是一样的</p>
+</li>
+<li>
+<p>想找一些bellman 入门介绍快速上手，目前看到的最详细的就是 https://electriccoin.co/blog/bellman-zksnarks-in-rust/ 了</p>
+</li>
+<li>
+<p>仍然记得sinka（高老师）说学习框架最好写一个排序，当时他用的是halo2</p>
+</li>
+<li>
+<p><a href="https://eprint.iacr.org/2023/1079.pdf">Foundations of Data Availability Sampling</a></p>
+</li>
+<li>
+<p><a href="https://zksync.mirror.xyz/HJ2Pj45EJkRdt5Pau-ZXwkV2ctPx8qFL19STM5jdYhc">Boojum Upgrade: zkSync Era’s New High-performance Proof System for Radical Decentralization</a></p>
+</li>
+</ul>
+<p>https://slush.dev/   tendermint + Cairo vm  定制L3 as service
+https://0xparc.org/blog/parc-squad 这个有点意思</p>
+<p>关于 20 年以后 zk 的综述, pan 老师有推荐吗 :</p>
+<ul>
+<li>20年以后形势就是社区为王，不少好东西先发hackmd了。综述当然也有不少，但都是更细分领域的了，比如 https://eprint.iacr.org/2023/671 ， https://eprint.iacr.org/2023/857  等等</li>
+</ul>
+<p>（发现和另一个研究群人员不overlap再发一遍）过了一遍HyperNova和Customizable constraint systems，感觉这个工作非常让人兴奋。CCS用来统一R1CS AIR PLONKish，然后用Nova IVC的方式multi-folding生成SNARK。有一种ZK界LLVM的即视感。各位老师怎么看。</p>
+<h1 id="zkp-qa"><a class="header" href="#zkp-qa">zkp QA</a></h1>
+<p>Question Lists:</p>
+<ul>
+<li>zkp 的前端？后端？算数化？</li>
+<li>什么是 MSM 加速？</li>
+<li>P!=NP ?</li>
+<li>SumCheck 没有办法转成非交互式的zk 证明吧？</li>
+</ul>
+<hr />
+<p>zkp 的前端？后端？算数化？ 我感觉应该是后端 需要@Kurt Pan 给出一个 前端 后端的定义</p>
+<ul>
+<li>https://a16zcrypto.com/posts/article/measuring-snark-performance-frontends-backends-and-the-future/</li>
+</ul>
+<p>有两种解释：</p>
+<ol>
+<li>前端=算术化/后端=证明系统</li>
+<li>前端=密码学编译器（比如多项式承诺）/后端=信息论证明系统（比如IOP）</li>
+</ol>
+<hr />
+<p>什么是 MSM 加速？</p>
+<p>以groth16为例，涉及7次NTT：4个INTT ，5次msm：其中1次G2的MSM 。
+整体Prover消耗上，MSM应该占据了70%多吧. NTT应该占据10-20%。</p>
+<hr />
+<p>P!=NP</p>
+<pre><code>刚郭老师说有人想听关于P vs NP问题的内容，这里刚好有一篇很新超棒的科普文章。我明天10:30可以给大家过一下这篇文章：
+https://www.quantamagazine.org/complexity-theorys-50-year-journey-to-the-limits-of-knowledge-20230817/
+
+“If you believe in hardness, then you should believe that it’s hard to prove hardness,” “why it had been so hard to prove that this seemingly hard problem about computational hardness was actually hard”
+
+“which intuitively seem harder and thus are perhaps easier to prove hard.”
+
+“complexity theory is itself complex” 看完了，这篇过于震撼
+
+研究PRG，研究succinctness，研究NIZK，研究secret sharing，这些密码学研究全都反过来都跟证明P不等于NP密切相关。再反过来又可以做到直接基于P不等于NP假设（而不是存在单向函数）的密码学。
+
+- https://www.quantamagazine.org/the-cryptographer-who-ensures-we-can-trust-our-computers-20230727/
+- https://www.quantamagazine.org/a-short-guide-to-hard-problems-20180716/
+- [P vs. NP and the Computational Complexity Zoo](https://www.youtube.com/watch?v=YX40hbAHx3s)
+- https://www.quantamagazine.org/complexity-theorys-50-year-journey-to-the-limits-of-knowledge-20230817/
+
+
+单向函数存在（P不等于NP），则存在对NP的ZKP；单向函数不存在（且P=NP），则也存在对NP的ZKP。
+
+前半句是GMW86原话。后半句：如果P=NP，又因为对P永远存在无条件的ZKP system，所以也存在无条件的对NP的证明系统。
+
+所以ZKP恰恰是少数无论P是否等于NP都存在的密码学协议。OTP也是。还有所有的「信息论安全密码学」。而大多数需要单向函数的密码协议，都活在Minicrypt之后。
+
+这个才是需要展开说说的。但上次随便一讲都讲了两个半小时，还只讲了一条线，耽误大家吃饭都[Facepalm]
+
+所以是不是可以理解为，只要有P问题的存在，就存在密码学协议
+我不知道密码学协议的定义，所以没法讨论
+
+对P问题的零知识证明系统trivial的无条件存在，这个证明系统就一个特点：完全无视prover
+
+赶紧学lattice吧
+</code></pre>
+<hr />
+<p>请教大家一个问题，SumCheck 没有办法转成非交互式的zk 证明吧？</p>
+<p>如果不强调非交互可以看这篇 https://arxiv.org/pdf/1704.02086.pdf
+如果强调非交互，就要小心绕过一个结论：一个零知识的public coin的交互式协议是不能应用Fiat-Shair转换为非交互的，soundness不能保证。</p>
+<ul>
+<li>这句话难懂，pan老师这个有文章说明么</li>
+</ul>
+<p>例子应该是 Barak01 的 non-blackbox simulation里的协议。上次Deng Yi老师讲的
+就是说过早达到 zk 性质对 fs 并非好事</p>
+<p>我的理解在 sumcheck 中，每一轮需 verifier 提供随机数给 prover，prover 计算 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 并发给verifier，这个计算 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 的过程 verifier 做不了，所以必须要交互</p>
+<ul>
+<li>没有让verifier做prover工作的。转非交互的思路是把verifier的工作（发随机数）让prover做（用哈希）。</li>
+<li>非交互这个词也不好，非交互不是没有交互，而是单向一轮交互</li>
+<li>在 sumcheck 的 step3 Verifier
+checks that the partial sum and total sum agree when the partial sum is evaluated at 0 and 1 and its outputs added。</li>
+<li>按照 https://semiotic.ai/articles/sumcheck-tutorial/ 中的描述只有verifier 验证partial sum 和total sum 的结果才能发送随机数</li>
+</ul>
+<p>[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~</p>
+<footer id="open-on-gh">Found a bug?! <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/materials/ZK-Materials.md">Edit this page on GitHub.</a></footer>
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../public goods/5-plonk-intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../exp/toc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../public goods/5-plonk-intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../exp/toc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/mermaid.min.js"></script>
+        <script src="../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>
