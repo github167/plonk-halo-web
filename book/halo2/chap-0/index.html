@@ -1,0 +1,648 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1-basic concepts - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="halo2/chap-0/index.md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../halo2/chap-0/index.html" class="active">1-basic concepts</a></li><li class="chapter-item "><a href="../../halo2/chap-1/index.html">2-simple-circuit</a></li><li class="chapter-item "><a href="../../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item "><a href="../../halo2/chap-4/index.html">5-range-check</a></li><li class="chapter-item "><a href="../../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/1-Simple-Example.html">1-Simple Examples</a></li><li class="chapter-item "><a href="../../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item "><a href="../../halo2/tmp/6-Range-Check(code-explanation).html">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../materials/ZK-Materials.html">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/chap-0/readme.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<ul>
+<li>作者:  <a href="https://github.com/dajuguan">@Po@Ethstorage.io</a> / <a href="https://github.com/demian101">@Demian</a> / <a href="https://github.com/readygo67">@Keep</a></li>
+<li>时间: 2023-10-18</li>
+<li>校对:  <a href="https://github.com/dajuguan">@Po@Ethstorage.io</a> / <a href="https://github.com/demian101">@Demian</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="#halo2%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5">Halo2核心概念</a>
+<ul>
+<li><a href="#halo2-%E7%94%B5%E8%B7%AF%E7%BB%93%E6%9E%84">Halo2 电路结构</a>
+<ul>
+<li><a href="#columns">Columns</a></li>
+<li><a href="#rows">Rows</a></li>
+<li><a href="#gate">Gate</a></li>
+<li><a href="#copy-constraint">Copy constraint</a></li>
+<li><a href="#region">Region</a></li>
+<li><a href="#layouter">Layouter</a>
+<ul>
+<li><a href="#simplefloorplanner">SimpleFloorPlanner</a></li>
+</ul>
+</li>
+<li><a href="#diagrams">Diagrams</a></li>
+</ul>
+</li>
+<li><a href="#halo2-%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B">Halo2 编程模型</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="halo2核心概念"><a class="header" href="#halo2核心概念">Halo2核心概念</a></h1>
+<p>在前面的 prerequisite 课程中，我们学习了 PLONK 协议及其 lookup table 优化，在本节我们将会以 <a href="https://github.com/zcash/halo2">halo2</a> 这个 Rust library 为基础，详细讲解 Halo2 的相关基本概念。</p>
+<h2 id="halo2-电路结构"><a class="header" href="#halo2-电路结构">Halo2 电路结构</a></h2>
+<p>我们知道，在 <a href="https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html">Vanilla PLONK 协议</a> 中，门约束系统相对固定和局限，表现力并不强：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">L</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.00773em;">R</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">b</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">O</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">b</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></p>
+<p>为了支持更复杂和更高阶的运算，halo2 中引入了 <code>custom gate</code> 和 <code>lookup table</code>，这使得约束系统中的约束并不限定在某一行上的变量，<code>custom gate</code> 可以任意指定约束需要的计算。 <sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>如下图，可以清晰地看到 PLONK 每个版本的演进，从而让 halo 2 能对 custom constraints 和 lookup table 进行支持：</p>
+<img src="imgs/APIs_image_16.png" style="zoom:50%;" />
+<p>在一般的电路代码结构中，都会有输入、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">===</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4653em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> 的格式，halo2 中，电路的 arithmetization（电路中的 expression） 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。</p>
+<blockquote>
+<p><a href="https://zcash.github.io/halo2/concepts/proofs.html">The halo2 Book</a>: The language that we use to express circuits for a particular proof system is called an <em><strong>arithmetization</strong></em>. Usually, an arithmetization will define circuits in terms of polynomial constraints on variables over a field. <sup class="footnote-reference"><a href="#9">2</a></sup></p>
+</blockquote>
+<p>如下图可以看到：</p>
+<ul>
+<li>电路表整体由单元（<code>cell</code>）、列（<code>Column</code>）和行（<code>Row</code>）组成，</li>
+<li>相邻的<code>cell</code>、<code>row</code> 和 <code>colum</code> 的任意组合可以构成 <code>region</code></li>
+<li>列又可以分为三种类型：<code>advice</code>，<code>instance</code> 和 <code>selector</code>，
+<ul>
+<li>其中 <code>advice/instance</code> columns 在同一个电路中填入的值可以不一样</li>
+<li><code>fixed</code> 和 <code>selector</code> columns 在电路 preprocessed 阶段生成，同一个电路填入的值是一样的，可以视为是电路结构固定的一部分</li>
+</ul>
+</li>
+</ul>
+<p>下面，我们会分别详细讲解各部分组件的用途及使用方法 <sup class="footnote-reference"><a href="#2">3</a></sup></p>
+<img src="imgs/APIs_image_1.png" style="zoom:27%;" />
+<h3 id="columns"><a class="header" href="#columns">Columns</a></h3>
+<p>我们可以将电路的<strong>输入</strong>和<strong>输出</strong>概念化为给定有限域 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6889em;"></span><span class="mord mathbb">F</span></span></span></span> 上 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> 列 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 行的矩阵</p>
+<p>下面我们来详细讲解各个 columns 的含义和用途：</p>
+<p><strong><code>instance columns</code></strong> ：包含了 Prover/Verifier 之间共享的输入，通常用于公共输入 (public inputs)</p>
+<ul>
+<li>例如 SHA256 的结果</li>
+<li>Merkle Tree 的根</li>
+</ul>
+<p><strong><code>advice columns</code></strong>：包含了 <code>private input</code> &amp; 电路运行中所需的中间变量，即witness,这部分只有<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span>知道</p>
+<p><strong><code>fixed columns</code></strong> ：包含在 key generation 阶段设置的 preprocessed values，可以视为是电路结构固定的一部分，也是可以被 pre-compute 的</p>
+<ul>
+<li>如电路中 hardcoded constant</li>
+<li>查找表 Lookup table column</li>
+</ul>
+<p><strong><code>selector columns</code></strong> ：即选择器，同样是在 key generation 阶段设置的 preprocessed values</p>
+<blockquote>
+<p>有些教程中也会直接将  selector columns 放入 fixed columns 中，这完全正确！因为 Selector 就是特殊的 fixed columns</p>
+<p>Tips: 同一行可以支持若干种不同的约束, 比如三元三次, 或者三元二次, 可以通过 selector 来选择具体需要满足哪个约束。比如有  3 个 custom gate, 可以只满足其中一个就 OK , 或者满足其中的 2 个，非常灵活</p>
+</blockquote>
+<!--
+we conceptualise the circuit as a matrix of m columns and n rows,  over a given finite field <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6889em;"></span><span class="mord mathbb">F</span></span></span></span> 
+
+ - `instance columns` contain inputs shared between prover/verifier , generally used for public inputs
+	 - e.g.  the res of SHA256
+	 - a root of a Merkle Tree. 
+ - `advice columns` contain private values witnessed by the prover
+ - `fixed columns` contain preprocessed values set at key generation
+
+fixed columns contain  preprocessed values set at key generation
+-->
+<h3 id="rows"><a class="header" href="#rows">Rows</a></h3>
+<p>矩阵中的行数通常是 2 的幂，受有限域 F 的大小限制；
+行数对应于 Plonkish 算术化(arithmetization) 中的 n-th 单位根(nth root of unity)。
+约束适用于所有行(apply to all the rows)，但可以通过选择器列中定义的  Selector 启用/禁用。 <sup class="footnote-reference"><a href="#8">4</a></sup></p>
+<h3 id="gate"><a class="header" href="#gate">Gate</a></h3>
+<p>门(Gate) 通常是由一组约束构成，这组约束通常受 selector 控制。 Halo2 提供两种类型的门：</p>
+<ul>
+<li>标准门(Standard gate)：标准门支持通用算术，例如域乘法和除法</li>
+<li>自定义门(Custom gate)：自定义门更具表现力，能够支持电路中的专门操作； 下面的斐波那契电路显示了自定义门的示例（请注意，启用选择器时，门将应用于每一行）</li>
+</ul>
+<h3 id="copy-constraint"><a class="header" href="#copy-constraint">Copy constraint</a></h3>
+<p>Plonk 的「拷贝约束」是通过「置换证明」（Permutation Argument）来实现，即把表格中需要约束相等的那些值进行循环换位，然后证明换位后的表格和原来的表格完全相等。</p>
+<p>Permutation Argument 提供了一种 cheap 的方式来证明集合中部分值的相等性。</p>
+<p>如下图，在 Fibonacci 示例中，我们会通过 <code>copy_advice</code> API 强制约束红色框、蓝色框的 2 对值分别相等</p>
+<img src="./imgs/halo2_image_4.png" style="zoom:30%;" />
+<h3 id="region"><a class="header" href="#region">Region</a></h3>
+<p>如果是第一次看视频或者读相关文档，你可能会发现 Region 是一个略显抽象的概念，不过没关系，向下读！</p>
+<p>在 halo2 中我们不会直接约束一整个电路的行和列，而是将整个电路划分为由相邻的行和列组成的 region，在 region 中可以采用相对偏移(relative offsets)的方式<strong>访问 Cell</strong>。 在一个 region 中，我们只关心 cells 之间的<strong>相对关系</strong></p>
+<p>如果两个约束没有关系，或者您也不关心两个 “cell” 之间如何相互作用的话，那么就应该将它们分别定义在 2 个不同的 regions 中，如此就可以将控制权交给halo2默认的layouter，让 layouter 去优化整体电路 region 分布，比如合并不同的region到一行来减小电路的规模（layouter 后面会讲解）。</p>
+<p>因此，并不推荐将整个电路的逻辑都塞进同一个庞大的 region，您应该尝试将其尽可能分解为逻辑清晰、结构简单的 regions。  <sup class="footnote-reference"><a href="#4">5</a></sup></p>
+<!--
+ - heuristically you can think of a region as like a self-contained block of flick and within this block you are concerned with relative offsets and you need certain cells to be placed relative to other cells in a specific way. whereas(相反) if you do not care about how two blocks interact with each other then you should define them in separate regions and the reason why this is better is you can hand some control to the `layouter` to optimize the layout of your regions
+ - so as opposed to like using a one region for your whole circuit,  you should try and break it up as far as possible into self-contained regions,  unless your whole circuit is literally the same gate repeating over and over.  in that case,  you just need one region.
+	 - 
+	 -->
+<!--
+电路构建往往是相对于一个 Region。同一个电路模块，可以在不同的 Region中“复制”。
+
+"regions" 是 `gates` 和全局电路 `layouter` 之间的界限：
+
+- 一个保留相对偏移的分配块：容易理解 gates 在区域内如何应用
+- 不受其他区域中的偏移影响：可以自由地重新排列以优化全局空间使用
+- 每个区域都是完全独立的，如果你试图编写跨越两个区域之间的界限的某些约束，你会很快发现你遇到了问题。[^3]
+
+"regions" are the boundary between `gates` and the global circuit `layouter` : 
+ - a block of assignments preserving relative offsets: easy to reason about how gates apply within the region
+ - not affected by offsets in other regions: can be freely rearranged to optimise global space usage
+ - each region is completely independent of other regions, and if you were to try to write some constraint that crossed the boundary between two regions you would quickly find that you run into problems. [^3] 
+-->
+<h3 id="layouter"><a class="header" href="#layouter">Layouter</a></h3>
+<p>看完了 region 的定义和讲解后，是不是还是有点不得要领？下面我们会介绍如何使用 Layouter 去布局 region，看完后也许你会对 region 有更进一步的认识。</p>
+<p>layouter 作用在 assignment （电路赋值）期间，即当你用 Witness 去填充整个 Circuit table 时使用。实际中，layouter一般不会一下子填满整个 table， 而是每次都会创建一个 region，并在其包含的单元格中填入相应的witness值。</p>
+<!-- 
+The layouter will be used during the assignment, namely when you fill up a table with the witness. Each time you will fill up a region. You won't fill the entire table at once.  layouter takes a region as input and assign values to that region.
+-->
+<p>为了保证每个 gate 能当访问到其所需的所有单元格，一般而言对 gate 所在的 region 进行电路布局时，region 需遵循如下规则： <strong>region 不需要与 custom gate 具有相同的形状，但 region 必须覆盖所有相关的 custom gate</strong></p>
+<img src="./imgs/APIs_image_10.png" style="zoom:30%;" />
+<p>比如上面的例子，在最上方的电路包含两个 custom gate (红色边框标识)，可以创建如下两种region:</p>
+<ol>
+<li>
+<p>左边的浅绿色矩形 Region 是 Valid Region ✅ :</p>
+<ul>
+<li>在 Region 中做的赋值 assignments 已经完全覆盖了左边的 <code>Custom Gate</code> 所需要的</li>
+<li>假设在 selector col 中，上面的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> , 下面的  <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> ，则说明用到了左边的 3 个 Cell</li>
+</ul>
+</li>
+<li>
+<p>而右边的浅绿色矩形 Region 是 invalid Region ❌:</p>
+<ul>
+<li>它没有覆盖与 <code>Custom Gate</code> 相关的所有单元格。 并且它并没有 assign <code>Custom Gate</code> 所需的所有单元格</li>
+<li>如果您打开了 selector，Region 应该覆盖由 <code>Custom Gate</code> 控制的所有单元格。</li>
+</ul>
+</li>
+</ol>
+<!--
+1. **A region doesn’t need to have the same shape as custom gate,  but must cover all related custom gates.**
+[pic]
+ - it didn't cover all of the cells related to the `Custom Gate`.  and it doesn't assign all the cells you need for that `Custom Gate`
+ - if you turn on the selector, you should cover all of cells controlled by this `Custom Gate`.
+-->
+<p>目前在 halo2 中有 2 种 Layouter 可供选择：</p>
+<ol>
+<li><strong>SimpleFloorPlanner</strong> (重点关注，也是最常用的)</li>
+<li>TwopassPlanner ?  V1/V1Plan ？</li>
+</ol>
+<!--
+2 layouters in halo2:
+1. **SimpleFloorPlanner**
+2. TwopassPlanner ?  V1/V1Plan ？
+-->
+<h4 id="simplefloorplanner"><a class="header" href="#simplefloorplanner">SimpleFloorPlanner</a></h4>
+<ul>
+<li>这是一个单通道布局器 (single-pass layouter)</li>
+<li>它为该区域中使用的每一列找到第一个空行并获取其所需的最多的单元格。</li>
+<li>它尝试尽可能多地合并相关的 regions 以使用<strong>更少的行</strong>。</li>
+</ul>
+<!--
+
+- It is a single-pass layouter. 
+- It finds the first empty row, for each column used in the region and takes a maximum.
+- trying to pack all our region as much as possible to use the **fewer rows**  -->
+<p>Region 的布局根据电路可以有各种形状，如:</p>
+<p><img src="imgs/APIs_image_11.png" alt="" /></p>
+<ul>
+<li>Region <code>1</code> : use one cell for 3 advice column</li>
+<li>Region <code>2</code> :  “L shape”</li>
+<li>Region <code>3</code> :  “L shape”</li>
+</ul>
+<p>以下几个 Q&amp;A 可以帮你进一步理解 region：</p>
+<ul>
+<li>Q：region 1 为什么不需要选择器？
+<ul>
+<li>A：你可以认为 region 1 是你想要初始化的一些 <strong>private input</strong>，它不涉及任何 selector，即这一行的门约束必须成立</li>
+</ul>
+</li>
+<li>Q：如下图，为什么 region 4 不向上填充到红色区域？
+<ul>
+<li>A：对于 Region 4 , 它本可以填到红色区域里面, 但是这不是咱们 SimpleFloorPlanner 能做的事 ~ （@Dr. Shen haicheng）</li>
+</ul>
+</li>
+</ul>
+<img src="imgs/APIs_image_12.png" style="zoom:50%;" />
+<!-- 
+Q: how does region `1` not include a selector ?
+A: you can think of region `1` is some **private input** you want to initialize, it doesn't involve any check (Selectors).
+-->
+<h3 id="diagrams"><a class="header" href="#diagrams">Diagrams</a></h3>
+<p>在 Halo2 中可以通过输出 diagrams 上述电路布局图，以非常直观地看到电路中所有 columns 的状态和电路整体布局，可以帮我们优化电路、查找 bug 等。</p>
+<p>halo2 一般可以通过调用如下 API 来生成电路布局图：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cfg(test)]
+mod tests {
+  use halo2_proofs::{dev::MockProver, pasta::Fp};
+  use super::*;
+
+  // ...
+  #[cfg(feature = "dev-graph")]
+  #[test]
+  fn plot_chap_1_circuit(){
+      // Instantiate the circuit with the private inputs.
+      let circuit = MyCircuit::&lt;Fp&gt;::default();
+      // Create the area you want to draw on.
+      // Use SVGBackend if you want to render to .svg instead.
+      use plotters::prelude::*;
+      let root = BitMapBackend::new("./images/chap_1_simple.png", (1024, 768)).into_drawing_area();
+      root.fill(&amp;WHITE).unwrap();
+      let root = root
+          .titled("Simple Circuit without chip", ("sans-serif", 60))
+          .unwrap();
+      halo2_proofs::dev::CircuitLayout::default()
+          // You can optionally render only a section of the circuit.
+          // .view_width(0..2)
+          // .view_height(0..16)
+          // You can hide labels, which can be useful with smaller areas.
+          .show_labels(true)
+          // Render the circuit onto your area!
+          // The first argument is the size parameter for the circuit.
+          .render(5, &amp;circuit, &amp;root)
+          .unwrap();
+  }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>所需的 <code>Cargo.toml</code> 配置</p>
+<pre><code class="language-bash">[features]
+dev-graph = ["halo2_proofs/dev-graph", "plotters", "plotters/bitmap_backend","plotters/bitmap_encoder"]
+
+plotters = { version = "0.3.0", default-features = true, optional = true }
+</code></pre>
+<p>需要开启<code>dev-graph</code>才能调用上述命令：</p>
+<pre><code class="language-bash">cargo test --dev-graph -- --nocapture chap_1::exercise_1::tests::plot_chap_1_circuit 
+</code></pre>
+<p><img src="imgs/APIs_image_2.png" alt="" /></p>
+<p>如上图，在一个电路布局图里：</p>
+<ul>
+<li>advice columns(witness) 是  <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:pink;">p</span><span class="mord mathnormal" style="margin-right:0.03148em;color:pink;">ink</span></span></span></span>  (粉色的)</li>
+<li>the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;color:lime;">l</span><span class="mord mathnormal" style="color:lime;">i</span><span class="mord mathnormal" style="margin-right:0.03588em;color:lime;">g</span><span class="mord mathnormal" style="color:lime;">h</span><span class="mord mathnormal" style="color:lime;">t</span><span class="mspace" style="color:lime;"><span style="color:lime;"> </span></span><span class="mord mathnormal" style="margin-right:0.03588em;color:lime;">g</span><span class="mord mathnormal" style="color:lime;">ree</span><span class="mord mathnormal" style="color:lime;">n</span></span></span></span> cells 说明在电路定义时用到了，是 Region 的一部分</li>
+<li>the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:green;">d</span><span class="mord mathnormal" style="margin-right:0.02778em;color:green;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;color:green;">ak</span><span class="mspace" style="color:green;"><span style="color:green;"> </span></span><span class="mord mathnormal" style="margin-right:0.03588em;color:green;">g</span><span class="mord mathnormal" style="color:green;">ree</span><span class="mord mathnormal" style="color:green;">n</span></span></span></span> cells 说明被赋值了</li>
+<li>the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:purple;">p</span><span class="mord mathnormal" style="color:purple;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:purple;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:purple;">pl</span><span class="mord mathnormal" style="color:purple;">e</span></span></span></span> regions 是 <code>fixed</code> columns (preprocessed value)
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;color:violet;">l</span><span class="mord mathnormal" style="color:violet;">i</span><span class="mord mathnormal" style="margin-right:0.03588em;color:violet;">g</span><span class="mord mathnormal" style="color:violet;">h</span><span class="mord mathnormal" style="color:violet;">t</span><span class="mspace" style="color:violet;"><span style="color:violet;"> </span></span><span class="mspace" style="color:violet;"><span style="color:violet;"> </span></span><span class="mord mathnormal" style="color:violet;">p</span><span class="mord mathnormal" style="color:violet;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:violet;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:violet;">pl</span><span class="mord mathnormal" style="color:violet;">e</span></span></span></span> : selector.</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:purple;">d</span><span class="mord mathnormal" style="color:purple;">a</span><span class="mord mathnormal" style="margin-right:0.02778em;color:purple;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;color:purple;">k</span><span class="mspace" style="color:purple;"><span style="color:purple;"> </span></span><span class="mspace" style="color:purple;"><span style="color:purple;"> </span></span><span class="mord mathnormal" style="color:purple;">p</span><span class="mord mathnormal" style="color:purple;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:purple;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:purple;">pl</span><span class="mord mathnormal" style="color:purple;">e</span></span></span></span> : constant values，比如 5</li>
+</ul>
+</li>
+</ul>
+<p>对比上图的单通道布局 vs 双通道布局，我们可以观察到一些有意思的结论:</p>
+<ul>
+<li>双通道布局器做了更多 region 布局方面的优化，将电路行数由 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">12</span></span></span></span></span></span></span></span></span></span></span></span> 优化到了 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">11</span></span></span></span></span></span></span></span></span></span></span></span> ，不过列数也有所增加</li>
+<li>一般而言，我们需要在电路布局做如下权衡：
+<ul>
+<li>减少电路使用的空间 (space) ，因为行数越多，fft 操作越多，Prove 过程就越慢</li>
+<li>增加电路的列数， <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span></span></span></span> 需要 commit 每个列，更多的列数，意味着更多的 <code>commitments</code>，也就意味着更大的 <code>proof size</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>为什么需要 commit  column?  电路结构在 preprocess 阶段已经确定，Prover 分别针对每列进行 commitment，可以有效防止 Prover 作弊，并将后续 commitment batch 起来</p>
+<p>为什么 rows 需要 fft ? 在 PLONK 中使用了多项式承诺，可以将证明生成中涉及到大量的多项式求值、以及计算商多项式等，这些都需要使用 fft 来加速运算 (FFT提供了一个高效的方法来转换多项式系数形式和它们的点值表示)。从而验证该行的多项式约束（custom gate）是否得到满足</p>
+</blockquote>
+ <!--
+ - the advice columns(witness) are still <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:pink;">p</span><span class="mord mathnormal" style="margin-right:0.03148em;color:pink;">ink</span></span></span></span>
+ - the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:green;">d</span><span class="mord mathnormal" style="margin-right:0.02778em;color:green;">r</span><span class="mord mathnormal" style="margin-right:0.03148em;color:green;">ak</span><span class="mspace" style="color:green;"><span style="color:green;"> </span></span><span class="mord mathnormal" style="margin-right:0.03588em;color:green;">g</span><span class="mord mathnormal" style="color:green;">ree</span><span class="mord mathnormal" style="color:green;">n</span></span></span></span> boxes just means that they have been assigned
+ - the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="color:purple;">p</span><span class="mord mathnormal" style="color:purple;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:purple;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:purple;">pl</span><span class="mord mathnormal" style="color:purple;">e</span></span></span></span> regions are `fixed` columns (preprocessed value)
+	 - <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;color:violet;">l</span><span class="mord mathnormal" style="color:violet;">i</span><span class="mord mathnormal" style="margin-right:0.03588em;color:violet;">g</span><span class="mord mathnormal" style="color:violet;">h</span><span class="mord mathnormal" style="color:violet;">t</span><span class="mspace" style="color:violet;"><span style="color:violet;"> </span></span><span class="mspace" style="color:violet;"><span style="color:violet;"> </span></span><span class="mord mathnormal" style="color:violet;">p</span><span class="mord mathnormal" style="color:violet;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:violet;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:violet;">pl</span><span class="mord mathnormal" style="color:violet;">e</span></span></span></span> : fixed column that is binary (0/1) we call these `selector` like in PLONK paper.
+	 - <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;color:purple;">l</span><span class="mord mathnormal" style="color:purple;">i</span><span class="mord mathnormal" style="margin-right:0.03588em;color:purple;">g</span><span class="mord mathnormal" style="color:purple;">h</span><span class="mord mathnormal" style="color:purple;">t</span><span class="mspace" style="color:purple;"><span style="color:purple;"> </span></span><span class="mspace" style="color:purple;"><span style="color:purple;"> </span></span><span class="mord mathnormal" style="color:purple;">p</span><span class="mord mathnormal" style="color:purple;">u</span><span class="mord mathnormal" style="margin-right:0.02778em;color:purple;">r</span><span class="mord mathnormal" style="margin-right:0.01968em;color:purple;">pl</span><span class="mord mathnormal" style="color:purple;">e</span></span></span></span> : non-binary so that you can witness constant values in them. for example like a fix column is **five** and you wanna your gate does like **five** times something, and we use these fixed columns.  [^5]
+
+Throughout the diagram, what are we trying to optimize?
+ - we're trying to reduce the space being used .
+ - Casue we do a lot of FFTs on the rows.
+
+What does columns do ? 
+ - each column, the prover needs to make a `commitment` to the column.
+ - so, more columns, more commitments ;  more commitments, larger proof.
+
+-->
+<h2 id="halo2-编程模型"><a class="header" href="#halo2-编程模型">Halo2 编程模型</a></h2>
+<p>Halo2 的编程模式采用 “ 配置-&gt; (计算+存储 +生成证明) -&gt; 验证 ”三个阶段。</p>
+<p><strong>配置(configure)</strong> 阶段定义约束关系。具体而言就是在 <code>meta.create_gate</code> 中从 <code>table</code> 中 <code>query cell</code>，并将 <code>query</code> 的结果 (即 expression，可以简单的理解为从某个 cell 中获取值的方式，在 configure 阶段并不知道具体的值，在第二阶段阶段才会被赋值) 形成约束。</p>
+<blockquote>
+<p>为了便于理解，不妨把 <code>query</code> 过程理解为 PCB 电路板上的探针，在 PCB 电路上探针取到的值输入到示波器或者逻辑分析仪，而 halo2 电路中的值会被用于生成证明和验证约束。
+需要指出，在 configure 阶段，电路并没有通电，也就是说，虽然电路板的逻辑约束已经形成，但是具体的值(信号、电流) 尚未被加载到电路中。</p>
+</blockquote>
+<p><strong>计算+存储（synthesize）</strong></p>
+<ul>
+<li>在电路的 <code>synthesize</code> 函数中，按照操作指令计算，并将计算结果填入适当的 Cell，相当于在 table上留下计算的 <code>trace</code></li>
+</ul>
+<p><strong>证明生成</strong> ：</p>
+<ul>
+<li>在 Prove 阶段，所有用到的 cell 被赋值且形成计算 trace  后，halo2 会具体计算每一列的多项式承诺。</li>
+</ul>
+<p><strong>验证</strong> ： 在 Verify 阶段，检查所有的约束是否满足。</p>
+<p>以上就是 Halo2 的一些关键概念，在<a href="https://learn.z2o-k7e.world/halo2/chap-1/index.html">下面一章</a>中，我们将会以一个最简的例子尝试使用 Halo2 library 提供的 API 编写电路！</p>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>borrowed from Star.Li https://mp.weixin.qq.com/s/VerLN8-tqetKs1Hv6m4KLg</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">3</sup>
+<p>lots of images borrowed from great <a href="https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api">0xPARC halo2 lectures</a></p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">6</sup>
+<p>https://www.youtube.com/watch?v=W_zlH2mmtZA  0:41:20 - 0xPARC - # Intro</p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">5</sup>
+<p>https://www.youtube.com/watch?v=vGQAMQRlN3E  0:30:49 - 0xPARC - L2</p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">7</sup>
+<p>https://www.youtube.com/watch?v=W_zlH2mmtZA 0:44:41 - Intro</p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">8</sup>
+<p>https://www.youtube.com/watch?v=vGQAMQRlN3E  0:17:42 - 0xPARC - L2</p>
+</div>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">9</sup>
+<p>https://mp.weixin.qq.com/s/VerLN8-tqetKs1Hv6m4KLg</p>
+</div>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">4</sup>
+<p>https://consensys.io/diligence/blog/2023/07/endeavors-into-the-zero-knowledge-halo2-proving-system/</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">2</sup>
+<p>https://zcash.github.io/halo2/concepts/proofs.html</p>
+</div>
+
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../halo2/halo2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../halo2/chap-1/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../halo2/halo2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../halo2/chap-1/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/mermaid.min.js"></script>
+        <script src="../../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>

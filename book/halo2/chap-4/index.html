@@ -1,0 +1,705 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>5-range-check - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="halo2/chap-4/index.md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/chap-0/index.html">1-basic concepts</a></li><li class="chapter-item "><a href="../../halo2/chap-1/index.html">2-simple-circuit</a></li><li class="chapter-item "><a href="../../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item expanded "><a href="../../halo2/chap-4/index.html" class="active">5-range-check</a></li><li class="chapter-item "><a href="../../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/1-Simple-Example.html">1-Simple Examples</a></li><li class="chapter-item "><a href="../../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item "><a href="../../halo2/tmp/6-Range-Check(code-explanation).html">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../materials/ZK-Materials.html">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/chap-4/readme.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<ul>
+<li>作者:  <a href="https://github.com/dajuguan">@Po@Ethstorage.io</a></li>
+<li>时间: 2023-10-31</li>
+<li>校对:  <a href="https://github.com/demian101">@Demian</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="#lookup">lookup</a>
+<ul>
+<li><a href="#%E5%8D%95%E5%88%97-lookup">单列 lookup</a>
+<ul>
+<li><a href="#%E7%94%B5%E8%B7%AF%E9%85%8D%E7%BD%AE%E5%8F%8A-lookup-%E7%BA%A6%E6%9D%9F">电路配置及 lookup 约束</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%9A%E5%88%97-lookup">多列 lookup</a>
+<ul>
+<li><a href="#%E7%94%B5%E8%B7%AF%E9%85%8D%E7%BD%AE">电路配置</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%9A%E5%88%97%E9%94%99%E8%A1%8C-lookup-table">多列错行 lookup table</a>
+<ul>
+<li><a href="#lookup-debug-%E7%9B%B8%E5%85%B3">lookup Debug 相关</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8A%A8%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8-pse-halo2s-lookup_any-api">动态查找表 <code>PSE Halo2's lookup_any API</code></a></li>
+</ul>
+</li>
+</ul>
+<h1 id="lookup"><a class="header" href="#lookup">lookup</a></h1>
+<p>前面的章节中我们介绍了 Halo2 的 API 和电路布局等核心概念，这节则介绍 Plonk 证明系统中基于 permutation argment 抽象出的一个强大功能 lookup 。Halo2 中使用的 lookup 对 <a href="https://eprint.iacr.org/2020/315.pdf">plookup</a> 进行了简化，可以约束<strong>一列或多列</strong>的 cells 的值属于对应的 lookup 列。</p>
+<p>如下图，我们可以通过 lookup 约束 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 两列中的第 1、3 行属于查找表( <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8095em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 列)中的某一行; 对于不需要查找的则约束其属于查找表的某个默认行（自己指定）。
+<img src="../imgs/lookup.png" alt="images" /></p>
+<p>关于 Zcash 版本的 lookup，有两个问题需要注意:</p>
+<ol>
+<li>多列 lookup 不同列的相同行必须<strong>同时存在</strong>于查找表中，Halo2 底层通过一个随机数将各列对应行的 row 组合起来使其回归到单列 lookup;</li>
+<li>多列 lookup 时，需约束的多列 witness 不一定在同一行（如下图中的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 在第一行，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 在第二行，这 2 个 witness 不同行），但是查找表中对应的所有列是在同一行（在 lookup table 中 2 个 witness 对应的 42, SHA(42) 是需要再同一行的）。比如上述例子也可以进行如下的 lookup:
+<img src="../imgs/lookup2.png" alt="images" /></li>
+</ol>
+<p>同时可参考对不在同一行的两列进行 lookup 的<a href="https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_3.rs">示例代码: halo2-tutorials/chap_4/circuit_1</a>。</p>
+<h2 id="单列-lookup"><a class="header" href="#单列-lookup">单列 lookup</a></h2>
+<p>首先从最简单的单列 lookup 介绍如何使用 lookup API。我们的目的是证明 <code>a[N]</code> 数组里的每一个 value 都在 <code>[0, RANGE]</code> 这个范围里面：</p>
+<pre><code class="language-bash">private inputs: a[N]
+constant: RANGE
+s.t: a[i] ∈ [0, RANGE], ∀ i ∈ [0, N-1]
+</code></pre>
+<p>若直接采用 gate 约束的话，我们需要设计形如</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mord">…</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">NGE</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∀</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span></span></p>
+<p>这样一个连乘表达式约束的电路，这种方式固然直观，但问题在于：当 RANGE 很大时 (比如 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span> )，电路的 degree 会很高, 这会导致整个 proof 很大。</p>
+<p>因此，我们可以采用 lookup 方式实现（回忆 permutation argument 只会将 degree 增加 1)，将 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">NGE</span><span class="mclose">]</span></span></span></span> 这些值填入 <code>TableColumn</code> 中 ( Zcash 版本的 Halo2 只支持静态查找表, 因此只能填入 <code>TableColumn</code>)，并借助 <code>lookup</code> API 来证明 所有的 <code>a[i]</code> 属于该 <code>TableColumn</code> 的某一行。</p>
+<p>整个电路结构如下:</p>
+<div class="table-wrapper"><table><thead><tr><th>adv</th><th>q_lookup</th><th>table</th></tr></thead><tbody>
+<tr><td>a[0]</td><td>1</td><td>0</td></tr>
+<tr><td>a[1]</td><td>1</td><td>1</td></tr>
+<tr><td>a[2]</td><td>1</td><td>2</td></tr>
+<tr><td>a[3]</td><td>1</td><td>3</td></tr>
+<tr><td>a[4]</td><td>1</td><td>4</td></tr>
+<tr><td>…</td><td>…</td><td>…</td></tr>
+<tr><td>a[N]</td><td>1</td><td>N-1</td></tr>
+<tr><td></td><td>0</td><td>N</td></tr>
+<tr><td></td><td>…</td><td>…</td></tr>
+<tr><td></td><td>0</td><td>RANGE</td></tr>
+</tbody></table>
+</div>
+<p><a href="https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_1.rs">完整代码见: halo2-tutorials/chap_4/circuit_2</a></p>
+<h3 id="电路配置及-lookup-约束"><a class="header" href="#电路配置及-lookup-约束">电路配置及 lookup 约束</a></h3>
+<p>如上表电路需要 1 列 Advice , 1 列 TableColumn, 1 列 Selector :</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone)]
+struct RangeConfig&lt;F:PrimeField, const RANGE: usize, const NUM: usize&gt;{
+    value: Column&lt;Advice&gt;,
+    table: LookUpTable&lt;F, RANGE&gt;,
+    q_lookup: Selector,
+}
+<span class="boring">}</span></code></pre></pre>
+<p>该电路配置定义为 <code>RangeConfig</code>，将其中的查找表单独定义为 <code>LookUpTable</code>。下面代码的 <code>[(q_lookup * v, table.table)]</code> 即表示：当 q_lookup 启用时，v 需要存在于 table 查找表中。相应代码为:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl &lt;F:PrimeField, const RANGE: usize, const NUM: usize&gt; RangeConfig&lt;F, RANGE, NUM&gt;{
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;,value: Column&lt;Advice&gt;) -&gt; Self {
+        let q_lookup = meta.complex_selector();
+        let table = LookUpTable::&lt;F,RANGE&gt;::configure(meta);
+        meta.lookup(|meta| {
+            let q_lookup = meta.query_selector(q_lookup);
+            let v = meta.query_advice(value, Rotation::cur());
+            vec![(q_lookup * v, table.table)]
+        });
+
+        RangeConfig {value, table, q_lookup}
+    }
+    
+    fn assign(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        value: [Value&lt;Assigned&lt;F&gt;&gt;;NUM]
+    ) -&gt; Result&lt;ACell&lt;F&gt;,Error&gt; {
+        
+        layouter.assign_region(|| "value to check", |mut region|{ //instantiate a new region, so it's not ref
+            self.q_lookup.enable(&amp;mut region, 0)?;
+            let mut cell= region.assign_advice(||"value", self.value, 0, || value[0]).map(ACell);
+            for i in 1..value.len() {
+                self.q_lookup.enable(&amp;mut region, i)?;
+                cell = region.assign_advice(||"value", self.value, i, || value[i])
+                .map(ACell);
+            }
+            cell
+        })
+    }
+}
+
+<span class="boring">}</span></code></pre></pre>
+<p>lookup 必须使用 <code>complex_selector</code>，因为 Halo2 可以根据这个标记知道这种 Selecotr 列不需要优化，而普通的 Selector 则可能会被 Layouter 进行合并等优化操作。</p>
+<p>对于 <code>LookUpTable</code>, 使用 <code>assign_table</code> 来填充 witness :</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone)]
+pub(crate) struct LookUpTable&lt;F:PrimeField, const RANGE: usize&gt; {
+    pub(crate) table: TableColumn,
+    _maker: PhantomData&lt;F&gt;
+}
+
+impl &lt;F:PrimeField, const RANGE: usize&gt; LookUpTable&lt;F, RANGE&gt; {
+    pub fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self {
+        let table = meta.lookup_table_column();
+        Self {table, _maker: PhantomData }
+    }
+
+    pub fn load(&amp;self, layouter: &amp;mut impl Layouter&lt;F&gt;) -&gt; Result&lt;(), Error&gt;{
+        layouter.assign_table( || "load range lookup table", 
+        |mut table|{
+            for value in 0..RANGE{
+               table.assign_cell(||"table cell", self.table, value, || Value::known(F::from(value as u64)))?;
+            }
+            Ok(())
+        })
+   
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>电路具体的 Trait 方法实现就比较简单了，在此不再赘述。</p>
+<h2 id="多列-lookup"><a class="header" href="#多列-lookup">多列 lookup</a></h2>
+<p>还可以对多列 witness 与对应的多列查找表进行 <code>lookup</code> 约束。本小节考虑如下例子: 证明某个值只有 <code>bit[N]</code> 比特位:</p>
+<pre><code class="language-bash">private inputs:  a[N], bit[N]
+s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
+</code></pre>
+<p>具体来说，假设对于一个 8 位的查找表，它可以存储 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">256</span></span></span></span> 个可能的值（即 [0,255] ），但我们并不总是需要用所有 256 个值，也就是即使查找表可以存储 8 位的值，我们也可以使用它来约束小于 8 位的值。</p>
+<p>例如，对于一个 1 位的值，我们只需查找两种可能的值（0 或 1）；对于一个 2 位的值，我们可以查找四种可能的值（00、01、10 或 11）…</p>
+<p>举个具体的例子：比如某 Prover 想证明其 value 确实只有 5 位 (即 value &lt;=  2^5 - 1 = 31 ) ，</p>
+<ul>
+<li>(value = 31/32, bit = 5 ) 是 private value.</li>
+<li>对于 value = 31，其二进制表达为 <code>11111</code>，确实只有 5 位，满足约束</li>
+<li>对于 value = 32，其二进制表达为 <code>100000</code>，其位数到达了 6 位，但是 Prover 填入电路的 bits 是 5 ，(这里你可以认为这是一个 malicious Prover)，它想作弊，但这是不可能的！ Prover 传入的这 2 个 private inputs 不满足 lookup table 在该处的约束。</li>
+</ul>
+<p>我们可以设计两列<code>TableColumn</code>, 其中一列 lookup table 为整数值 <code>table_value</code>，另一列为其对应的 bit 位数 <code>table_n_bits</code>；</p>
+<p>并约束 witness 中值那一列 <code>value</code> 和比特位那一列 <code>bit</code> 属于前述的两列 <code>TableColumn</code> lookup table</p>
+<div class="table-wrapper"><table><thead><tr><th>value</th><th>bit</th><th>q_lookup</th><th>table_n_bits</th><th>table_value</th></tr></thead><tbody>
+<tr><td>v[0]</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>v[1]</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>2</td><td>2</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>2</td><td>3</td></tr>
+<tr><td>…</td><td>…</td><td>…</td><td>3</td><td>4</td></tr>
+</tbody></table>
+</div>
+<p><a href="https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_2.rs">完整代码见: halo2-tutorials/chap_4/circuit_3</a></p>
+<h3 id="电路配置"><a class="header" href="#电路配置">电路配置</a></h3>
+<p>这里我们重点关注 <code>lookup</code> 约束相关代码:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone)]
+struct RangeCheckConfig&lt;F:PrimeField, const NUM_BITS: usize, const RANGE: usize&gt;{
+    value: Column&lt;Advice&gt;,
+    bit: Column&lt;Advice&gt;,
+    q_lookup: Selector,
+    table: RangeCheckTable&lt;F, NUM_BITS, RANGE&gt;
+}
+
+impl &lt;F:PrimeField, const NUM_BITS: usize, const RANGE: usize&gt; RangeCheckConfig&lt;F, NUM_BITS, RANGE&gt; {
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;, ) -&gt; Self {
+        //when to configure the colum, during config or circuit instance: configure time
+        let value = meta.advice_column();
+        let bit = meta.advice_column();
+        let q_lookup = meta.complex_selector();
+        let table = RangeCheckTable::configure(meta);
+
+        meta.lookup(|meta|{
+            let default_value = Expression::Constant(F::ZERO);
+            let default_bit = Expression::Constant(F::ONE);
+            let mut v = meta.query_advice(value, Rotation::cur());
+            let mut b = meta.query_advice(bit, Rotation::cur());
+            let q = meta.query_selector(q_lookup);
+            let non_q = Expression::Constant(F::ONE) - q.clone();
+            v = v*q.clone() + non_q.clone()*default_value;
+            b = b*q + non_q*default_bit;
+            vec![(b, table.n_bits),(v, table.value)]
+        });
+
+        RangeCheckConfig { value,bit, q_lookup, table }
+    }
+...
+}
+<span class="boring">}</span></code></pre></pre>
+<p>这里我们对于不需要 <code>lookup</code> 的行为其指定默认值保证所有行均满足 <code>lookup</code> 约束， <code>vec![(b, table.n_bits), (v, table.value)]</code> 则范围两组对应的<code>(cell expression, lookup table)</code>。</p>
+<h2 id="多列错行-lookup-table"><a class="header" href="#多列错行-lookup-table">多列错行 lookup table</a></h2>
+<p>如下图所示，假若想约束的的 2 列 witness 不在同一行，而是错行的：</p>
+<p><img src="../imgs/lookup_3.png" alt="images" /></p>
+<p>对于这种情况 halo2 也可以灵活地处理：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: PrimeField&gt; LookupChip&lt;F&gt; {
+    fn construct(config: LookupConfig) -&gt; Self {
+        LookupChip {
+            config,
+            _marker: PhantomData,
+        }
+    }
+
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; LookupConfig {
+        let a = meta.advice_column();
+        let b = meta.advice_column();
+        let s = meta.complex_selector();
+        let t1 = meta.lookup_table_column();
+        let t2 = meta.lookup_table_column();
+
+        meta.enable_equality(a);
+        meta.enable_equality(b);
+
+        meta.lookup(|meta| {
+            let cur_a = meta.query_advice(a, Rotation::cur());
+            let next_b = meta.query_advice(b, Rotation::next());
+            let s = meta.query_selector(s);
+            // we'll assgin (0, 0) in t1, t2 table
+            // so the default condition for other rows without need to lookup will also satisfy this constriant
+            vec![(s.clone() * cur_a, t1), (s * next_b, t2)]
+        });
+
+        LookupConfig { a, b, s, t1, t2 }
+    }
+
+    fn assign(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        a_arr: &amp;Vec&lt;Value&lt;F&gt;&gt;,
+        b_arr: &amp;Vec&lt;Value&lt;F&gt;&gt;,
+    ) -&gt; Result&lt;(), Error&gt; {
+        layouter.assign_region(
+            || "a,b",
+            |mut region| {
+                for i in 0..a_arr.len() {
+                    self.config.s.enable(&amp;mut region, i)?;
+                    region.assign_advice(|| "a col", self.config.a, i, || a_arr[i])?;
+                }
+
+                for i in 0..b_arr.len() {
+                    region.assign_advice(|| "b col", self.config.b, i, || b_arr[i])?;
+                }
+
+                Ok(())
+            },
+        )?;
+<span class="boring">}</span></code></pre></pre>
+<p>在上面的代码中，</p>
+<ol>
+<li>利用 <code>[(s.clone() * cur_a, t1), (s * next_b, t2)]</code> 这 2 个需要同时成立的约束，我们同时约束了 <code>a</code> 的当前行和 <code>b</code> 的下一行需要存在于多列查找表中。</li>
+<li>在 assign 函数中，我们只对 advice column <code>a</code> 进行了约束，而没有对 advice column <code>b</code> 应用 selector，目的是只对 a 有值的这些行进行约束。如此就给 b 列提供了更多的灵活性。</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    #[test]
+    fn test_lookup_on_different_rows() {
+        let k = 5;
+        let a = [0, 1, 2, 3, 4];
+        let b = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let a = a.map(|v| Value::known(Fp::from(v))).to_vec();
+        let b = b.map(|v| Value::known(Fp::from(v))).to_vec();
+        let circuit = MyCircuit { a, b };
+        let prover = MockProver::run(k, &amp;circuit, vec![]).unwrap();
+        prover.assert_satisfied();
+    }
+<span class="boring">}</span></code></pre></pre>
+<ul>
+<li>如上代码，只对 a 列有值的情况进行了约束，b 列的取值变得灵活。</li>
+</ul>
+<h3 id="lookup-debug-相关"><a class="header" href="#lookup-debug-相关">lookup Debug 相关</a></h3>
+<p>在 lookup 电路设计时，以典型的 <code>halo2-tutorials/chap_4/circuit_1</code> 为例，可能会遇到如下报错:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>error: lookup input does not exist in table
+  (L0, L1) ∉ (F0, F1)
+
+  Lookup inputs: 每一个 lookup 会出现这一行,整个 lookup 分为两组: L0 和 L1
+    L0 = x1 * x0 :，这是第一组 (witness: A0 列, table: F2 列), 电路中为`(b, table.n_bits)`
+    ^
+    | Cell layout in region 'a b':
+    |   | Offset | A0 | F2 |
+    |   +--------+----+----+
+    |   |    1   | x0 | x1 | &lt;--{ Lookup inputs queried here
+    |
+    | Assigned cell values:
+    |   x0 = 1
+    |   x1 = 1
+
+    L1 = x1 * x0 : 这是第二组 (witness: A0 列, table: F2 列), 电路中为 `(v, table.value)`
+    ^
+    | Cell layout in region 'a b':
+    |   | Offset | A1 | F2 |
+    |   +--------+----+----+
+    |   |    1   |    | x1 | &lt;--{ Lookup inputs queried here
+    |   |    2   | x0 |    |
+    |
+    | Assigned cell values:
+    |   x0 = 0x3
+    |   x1 = 1
+<span class="boring">}</span></code></pre></pre>
+<p>理解上述报错，可以让我们更快地调试。报错结构如何理解在上图中均已表明，且 cell 的相对值也体现的很清楚(注意 <code>L1</code> 中的 <code>x0</code> 相对 <code>L0</code> 中的 <code>x0</code> 向下偏移了 1 , 这与电路一致)。</p>
+<h2 id="动态查找表-pse-halo2s-lookup_any-api"><a class="header" href="#动态查找表-pse-halo2s-lookup_any-api">动态查找表 <code>PSE Halo2's lookup_any API</code></a></h2>
+<p>注意到使用 Zcash 版本 Halo2 进行 <code>lookup</code> 约束时，由于没法对 TableColumn 进行 <code>query_advice</code>这导致除了 <code>lookup</code> 约束外，无法灵活地对 <code>TableColumn</code> 中的 cell 进行 gate 约束，即<code>TableColumn</code>必须在电路初始化阶段写死，无法再更改了，即只能进行静态查找。</p>
+<p>因此，Zcash 团队的核心开发者为 <a href="https://github.com/privacy-scaling-explorations/halo2/blob/0c3e3b569519b86653a64f412bbce17e4e8acac4/halo2_proofs/src/plonk/circuit.rs#L1761">PSE Halo2</a> 版本开发了 <code>lookup_any</code> API, 使其也支持对任意类型的列，如<code>Advice</code>、<code>FixedColumn</code> 等进行 <code>lookup</code>, 即实现了动态查找表。<code>lookup_any</code> 使用方式与 <code>lookup</code> 没有太大的区别，来看其具体的<a href="https://github.com/privacy-scaling-explorations/halo2/blob/0c3e3b569519b86653a64f412bbce17e4e8acac4/halo2_proofs/src/dev.rs#L1800">一些例子</a></p>
+<p>下面的代码中，定义了 2 个 lookup table： <code>instance_table</code> &amp; <code>advice_table</code> :</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>	#[test]
+	fn bad_lookup_any() {
+	
+		impl Circuit&lt;Fp&gt; for FaultyCircuit {
+			fn configure(meta: &amp;mut ConstraintSystem&lt;Fp&gt;) -&gt; Self::Config {
+				let instance_table = meta.instance_column(); // lookup as Instance Columns
+				let advice_table = meta.advice_column();
+				let a = cells.query_advice(a, Rotation::cur());
+				
+                meta.annotate_lookup_any_column(instance_table, || "Inst-Table");
+                meta.enable_equality(instance_table);
+                meta.annotate_lookup_any_column(advice_table, || "Adv-Table");
+                meta.enable_equality(advice_table);
+
+                meta.lookup_any("lookup", |cells| {
+                    let advice_table = cells.query_advice(advice_table, Rotation::cur());
+                    let instance_table = cells.query_instance(instance_table, Rotation::cur());
+				// ..
+                    vec![
+                        (
+                            q.clone() * a.clone() + not_q.clone() * default.clone(),
+                            instance_table,
+                        ),
+                        (q * a + not_q * default, advice_table),
+                    ]});
+		}
+		// ...
+	let custom_lookup_table = vec![vec![
+			Fp::from(1u64),
+			Fp::from(2u64),
+			Fp::from(4u64),
+			Fp::from(6u64),
+		]];
+	let prover = MockProver::run(
+			K,
+			&amp;FaultyCircuit {},
+			// This is our "lookup table".
+			custom_lookup_table,
+		)
+		.unwrap();
+		assert_eq!(
+			prover.verify(),
+			Err(vec![VerifyFailure::Lookup {
+				name: "lookup".to_string(),
+				lookup_index: 0,
+				location: FailureLocation::InRegion {
+					region: (1, "Faulty synthesis").into(),
+					offset: 1,
+				}
+			}])
+		);
+	}
+<span class="boring">}</span></code></pre></pre>
+<p>如上代码的动态查找表中：</p>
+<ul>
+<li>2 个 lookup table 在 Circuit <code>configure</code> 阶段被分别定义为了 instance column 和 advice columns，而后在 “lookup” 门约束中（<code>lookup_any()</code>），advice col <code>a</code> 须满足 2 个约束：
+<ul>
+<li><code>a</code> 需能在 lookup table <code>instance_table</code> 中被查找到，且同时也</li>
+<li>能在 lookup table <code>advice_table</code> 中被查找到</li>
+</ul>
+</li>
+<li>在 <code>synthesize()</code> 阶段，<code>advice_table</code> 这个 lookup table 由 instance col 生成（可以理解为复制了一份 <code>instance_table</code> 到 <code>advice_table</code> ）
+<ul>
+<li>在 “Good synthesis” 中，advice 的赋值都能在 2 个 lookup tables 中被查找到，满足约束；</li>
+<li>而在 “Faulty synthesis” 中，<code>Fp::from(5)</code> 这个 advice 赋值不能在 lookup tables 中被查找到，所以不满足约束。</li>
+</ul>
+</li>
+<li>Prover 在 prove 阶段，可以将 <strong>Public Input(PI) 或 advice column(witness)</strong> 作为 lookup table， 这种方式提供给了 halo2 电路更大的灵活度。</li>
+</ul>
+<p>除此之外，还可以参考<a href="https://github.com/dajuguan/zkvm_brainfuck/blob/257014e29a81ba3a3e03800893cae8f00082f84d/bf_zk/src/main_config.rs#L46"><code>brainfuck zkvm</code>的例子</a>。</p>
+
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../halo2/chap-3/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../halo2/cost-model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../halo2/chap-3/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../halo2/cost-model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/mermaid.min.js"></script>
+        <script src="../../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>

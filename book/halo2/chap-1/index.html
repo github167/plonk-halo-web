@@ -1,0 +1,634 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2-simple-circuit - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="halo2/chap-1/index.md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/chap-0/index.html">1-basic concepts</a></li><li class="chapter-item expanded "><a href="../../halo2/chap-1/index.html" class="active">2-simple-circuit</a></li><li class="chapter-item "><a href="../../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item "><a href="../../halo2/chap-4/index.html">5-range-check</a></li><li class="chapter-item "><a href="../../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/1-Simple-Example.html">1-Simple Examples</a></li><li class="chapter-item "><a href="../../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item "><a href="../../halo2/tmp/6-Range-Check(code-explanation).html">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../materials/ZK-Materials.html">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/chap-1/readme.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<ul>
+<li>作者:  <a href="https://github.com/dajuguan">@Po@Ethstorage.io</a> / <a href="https://github.com/demian101">@Demian</a></li>
+<li>时间: 2023-10-18</li>
+<li>校对:  <a href="https://github.com/dajuguan">@Po@Ethstorage.io</a> / <a href="https://github.com/demian101">@Demian</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="#halo2-api-%E7%AE%80%E4%BB%8B">Halo2 API 简介</a>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%94%B5%E8%B7%AF%E5%92%8C-config">创建电路和 Config</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-circuit-trait-%E7%9A%84%E5%89%8D%E4%B8%A4%E4%B8%AA%E5%85%B3%E8%81%94%E6%96%B9%E6%B3%95">实现 Circuit trait 的前两个关联方法</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-witness-%E5%A1%AB%E5%85%85">实现 witness 填充</a></li>
+<li><a href="#mock-prove">Mock prove</a></li>
+<li><a href="#%E6%A3%80%E6%9F%A5-circuit-%E5%B8%83%E5%B1%80">检查 Circuit 布局</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="halo2-api-简介"><a class="header" href="#halo2-api-简介">Halo2 API 简介</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>上节我们介绍了Halo2的核心概念，本节则以 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span></span></span></span> 这个电路为例，来说明如何使用 Halo2 API来写电路。
+该电路的各个参数说明如下：</p>
+<pre><code class="language-bash">private inputs:  a, b, c
+public inputs :  out
+constraints   :  a^2 * b^2 * c = out
+</code></pre>
+<p>我们的目的是写一个电路，让Prover证明对于公共输入<code>out</code>,他知道三个秘密输入<code>a, b, c</code>满足 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span></span></span></span> 这个约束。
+从电路的角度，只使用 <code>乘法门</code> 和 <code>乘法选择器</code>，上述约束可以算数化为:</p>
+<div class="table-wrapper"><table><thead><tr><th>instance</th><th>advice_0</th><th>advice_1</th><th>selector_mul</th></tr></thead><tbody>
+<tr><td><em>out</em></td><td>a</td><td></td><td></td></tr>
+<tr><td></td><td>b</td><td></td><td></td></tr>
+<tr><td></td><td>c</td><td></td><td></td></tr>
+<tr><td></td><td>a</td><td>b</td><td>1</td></tr>
+<tr><td></td><td>ab</td><td></td><td>0</td></tr>
+<tr><td></td><td>ab</td><td>ab</td><td>1</td></tr>
+<tr><td></td><td>absq</td><td></td><td>0</td></tr>
+<tr><td></td><td>absq</td><td>c</td><td>1</td></tr>
+<tr><td></td><td><em>out</em></td><td></td><td>0</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>看到这里可能会产生疑问，这个 table 是如何填写出来的呢？其实，这个填写规则是与门约束一一对应的，而门约束可以很随意设计，所以关键是得确定</p>
+<ul>
+<li>有几种门约束</li>
+<li>每种门约束涉及哪几个单元格及多项式约束公式
+absq 即 ab 的平方。</li>
+</ul>
+</blockquote>
+<p>我们的目的则是：</p>
+<ol>
+<li>利用 Halo2 定义好上述约束 (gates 和 equality constrains)，</li>
+<li>并使用其 private value 填好上述表格 (即 assign witness)。</li>
+</ol>
+<p>使用 Halo2 编写电路，需要为 <code>struct MyCircuit</code> 实现 <code>halo2_proofs::plonk::Circuit</code> trait, 其中包括以下 3 个关联方法: <sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<ul>
+<li><code>without_witnesses</code>: 创建默认无需 witness 的 Circuit 实例</li>
+<li><code>configure</code>: 需要自定义:
+<ol>
+<li>电路配置:
+<ol>
+<li>advice cols (即 witness，包含 private inputs 和 trace),</li>
+<li>instance cols (Public Inputs)</li>
+<li>selector (电路选择器)</li>
+</ol>
+</li>
+<li>custom gate 约束</li>
+</ol>
+</li>
+<li><code>synthesize</code>: 需要根据上述表格实现填充 witness 的逻辑，即按照验证程序的逻辑正确写入将数据写入表格的每个 Cell:
+<ol>
+<li>填充以 Region 为基本单位(多行+多列构成的矩形)，可以在 region 中以相对引用的方式引用其他Row</li>
+<li>有两种填充方式: copy_advice (还会产生 equality 约束) + assign_advice(不会产生 equality 约束)</li>
+</ol>
+</li>
+</ul>
+<p>一旦定义好上述 3 个关联方法，Halo2 便可以在电路实例化后调用相关 API <strong>自动运行</strong>(不需要手动触发上述函数)上述逻辑来填充 witness 和生成 proof。</p>
+<h2 id="创建电路和-config"><a class="header" href="#创建电路和-config">创建电路和 Config</a></h2>
+<p>根据电路构建所需模块，首先需要确定电路配置，上述电路一共需要四列: <sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<ul>
+<li>2 列 witness(advice) 用来填充上述表格的<code>a0</code>和<code>a1</code>列，
+<ul>
+<li>其中 3 个 Private inputs: <code>a</code>, <code>b</code> 和 <code>c</code> 填入 <code>a0</code> 列的前三行。</li>
+</ul>
+</li>
+<li>1 列 instance (填入公共输出 out),</li>
+<li>1 列乘法门选择器(s_mul);</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug, Clone)]
+struct CircuitConfig {
+    advice: [Column&lt;Advice&gt;;2],
+    instance: Column&lt;Instance&gt;,
+    s_mul: Selector,
+}
+
+#[derive(Default)]
+struct MyCircuit&lt;F:Field&gt; {
+    c: F,
+    a: Value&lt;F&gt;,
+    b: Value&lt;F&gt;
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="实现-circuit-trait-的前两个关联方法"><a class="header" href="#实现-circuit-trait-的前两个关联方法">实现 Circuit trait 的前两个关联方法</a></h2>
+<p>根据电路配置以及我们只需要乘法门，来实现<code>configure</code> 方法：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl &lt;F:Field&gt; Circuit&lt;F&gt; for MyCircuit&lt;F&gt; {
+  fn without_witnesses(&amp;self) -&gt; Self {
+        Self::default()
+    }
+
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self::Config {
+        let advice = [meta.advice_column(),meta.advice_column()];
+        let instance = meta.instance_column();
+
+        meta.enable_equality(instance);
+        for c in &amp;advice {
+            meta.enable_equality(*c);
+        }
+        let s_mul = meta.selector();
+        /* Gate design:
+            | a0 | a1 | s_mul|
+            |----|----|------|
+            |lhs |rhs |s_mul |
+            |out |    |      |  
+        */
+        meta.create_gate("mul_gate", |meta| {
+            let lhs = meta.query_advice(advice[0], Rotation::cur());
+            let rhs = meta.query_advice(advice[1], Rotation::cur());
+            let out = meta.query_advice(advice[0], Rotation::next());
+            let s_mul = meta.query_selector(s_mul);
+            vec![s_mul * (lhs*rhs - out)]
+        });
+
+        CircuitConfig {
+            advice,
+            instance,
+            s_mul
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>需要注意的是 Halo2 中为了优化需要通过 enable_equality 明确指定哪些列设置 equality 约束。同时由于要保证 gate 对每一行的 witness 都满足约束，所以只能通过 query_advice 来获取每个门<code>虚拟的</code>输入和输出(实际的值在 synthesize 时填入)以生成多项式约束，即保证 gate 返回的 vec 为 0。</p>
+<h2 id="实现-witness-填充"><a class="header" href="#实现-witness-填充">实现 witness 填充</a></h2>
+<p>按照表格,一步步填充 witness：</p>
+<ol>
+<li>load private inputs <code>a</code>, <code>b</code> 和 <code>c</code></li>
+<li>分别计算三个乘法的输入输出值 (<code>ab</code>, <code>absq</code>, <code>out</code>)，并通过 <code>assign_advice</code> 和 <code>copy_advice</code> 这两个 API 填充 Cell</li>
+<li>通过 <code>constrain_instance</code> API, 约束 out 所在的 Cell 和 instance 列的第一个 cell 相等</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn load_private&lt;F:Field&gt;( 
+    config: &amp;CircuitConfig,
+    mut layouter: impl Layouter&lt;F&gt;,
+    value: Value&lt;F&gt;) -&gt; Result&lt;Number&lt;F&gt;, Error&gt; {
+    layouter.assign_region(
+        || "load private", 
+        |mut region| {
+            region.assign_advice(
+                || "private input", 
+                config.advice[0], 
+                0, 
+                || value
+            ).map(Number)
+    })
+}
+
+fn load_constant&lt;F:Field&gt;( 
+    config: &amp;CircuitConfig,
+    mut layouter: impl Layouter&lt;F&gt;,
+    c: F
+) -&gt; Result&lt;Number&lt;F&gt;, Error&gt; {
+    layouter.assign_region(
+        || "load private", 
+    |mut region| {
+        region.assign_advice_from_constant(
+            || "private input", 
+            config.advice[0], 
+            0, 
+            c
+        ).map(Number)
+    })
+}
+
+fn mul&lt;F:Field&gt;(
+    config: &amp;CircuitConfig,
+    mut layouter: impl Layouter&lt;F&gt;,
+    a: Number&lt;F&gt;,
+    b: Number&lt;F&gt;,
+) -&gt; Result&lt;Number&lt;F&gt;, Error&gt; {
+    layouter.assign_region(
+        || "mul", 
+    |mut region| {
+        config.s_mul.enable(&amp;mut region, 0)?;
+        a.0.copy_advice(|| "lhs", &amp;mut region, config.advice[0], 0)?;
+        b.0.copy_advice(|| "rhs", &amp;mut region, config.advice[1], 0)?;
+
+        let value = a.0.value().copied() * b.0.value().copied();
+        region.assign_advice(|| "out=lhs*rhs", config.advice[0], 1, || value)
+        .map(Number)
+    })
+}
+
+impl &lt;F:Field&gt; Circuit&lt;F&gt; for MyCircuit&lt;F&gt; {
+    //...
+    fn synthesize(&amp;self, config: Self::Config, mut layouter: impl Layouter&lt;F&gt;) -&gt; Result&lt;(), Error&gt; {
+        let a = load_private(&amp;config,layouter.namespace(|| "load a"), self.a)?;
+        let b = load_private(&amp;config,layouter.namespace(|| "load b"), self.b)?;
+        let c = load_constant(&amp;config,layouter.namespace(|| "load c"), self.c)?;
+
+
+        let ab = mul(&amp;config,layouter.namespace(|| "a*b"), a, b)?;
+        let absq = mul(&amp;config,layouter.namespace(|| "ab*ab"), ab.clone(), ab)?;
+        let out = mul(&amp;config, layouter.namespace(|| "absq*c"), absq, c)?;
+
+        //expose public
+        layouter.namespace(|| "expose out").constrain_instance(out.0.cell(), config.instance, 0)
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h2 id="mock-prove"><a class="header" href="#mock-prove">Mock prove</a></h2>
+<p>最后实例化电路，并调用相应的Mock Prover来验证:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cfg(test)]
+mod tests {
+    use halo2_proofs::{dev::MockProver, pasta::Fp};
+    use super::*;
+    #[test]
+    fn test_simple() {
+        // ANCHOR: test-circuit
+        // The number of rows in our circuit cannot exceed 2^k. Since our example
+        // circuit is very small, we can pick a very small value here.
+        let k = 5;
+    
+        // Prepare the private and public inputs to the circuit!
+        let c = Fp::from(2);
+        let a = Fp::from(2);
+        let b = Fp::from(3);
+        let out = c * a.square() * b.square();
+        println!("out=:{:?}",out);
+    
+        // Instantiate the circuit with the private inputs.
+        let circuit = MyCircuit {
+            c,
+            a: Value::known(a),
+            b: Value::known(b),
+        };
+    
+        // Arrange the public input. We expose the multiplication result in row 0
+        // of the instance column, so we position it there in our public inputs.
+        let mut public_inputs = vec![out];
+    
+        // Given the correct public input, our circuit will verify.
+        let prover = MockProver::run(k, &amp;circuit, vec![public_inputs.clone()]).unwrap();
+        assert_eq!(prover.verify(), Ok(()));
+    
+        // If we try some other public input, the proof will fail!
+        public_inputs[0] += Fp::one();
+        let prover = MockProver::run(k, &amp;circuit, vec![public_inputs]).unwrap();
+        assert!(prover.verify().is_err());
+        println!("simple success!")
+        // ANCHOR_END: test-circuit
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>其中:<code>MockerProver.run</code>会分别调用实例化电路的 <code>configure</code> 和 <code>synthesis</code> 函数以生成电路约束和填充 witness 列(详见 Prover 的<a href="https://github.com/zcash/halo2/blob/f9838c127ec9c14f6f323e0cfdc0c1392594d37f/halo2_proofs/src/plonk/prover.rs#L135">assign_advice函数</a>)。
+<code>prover.verify()</code> 则会检查所有的门、lookup、permuation等生成的约束是否满足。</p>
+<p>运行<code>cargo run test_chap_1_simple</code>, 测试成功。</p>
+<h2 id="检查-circuit-布局"><a class="header" href="#检查-circuit-布局">检查 Circuit 布局</a></h2>
+<p>同时，还可以利用上节提到的 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格<strong>不是绿色</strong>。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>    #[cfg(feature = "dev-graph")]
+    #[test]
+    fn plot_circuit(){
+        // Instantiate the circuit with the private inputs.
+        let circuit = MyCircuit::&lt;Fp&gt;::default();
+        // Create the area you want to draw on.
+        // Use SVGBackend if you want to render to .svg instead.
+        use plotters::prelude::*;
+        let root = BitMapBackend::new("layout.png", (1024, 768)).into_drawing_area();
+        root.fill(&amp;WHITE).unwrap();
+        let root = root
+            .titled("Simple Circuit without chip", ("sans-serif", 60))
+            .unwrap();
+
+        halo2_proofs::dev::CircuitLayout::default()
+            // You can optionally render only a section of the circuit.
+            // .view_width(0..2)
+            // .view_height(0..16)
+            // You can hide labels, which can be useful with smaller areas.
+            .show_labels(true)
+            // Render the circuit onto your area!
+            // The first argument is the size parameter for the circuit.
+            .render(5, &amp;circuit, &amp;root)
+            .unwrap();
+    }
+<span class="boring">}</span></code></pre></pre>
+<p>运行<code>cargo test plot_chap_1_circuit  --features dev-graph</code>，可以输出电路结构图。</p>
+<p>从下图可以看出，整个电路一共9行4列，与表格设计一致。
+<img src="../imgs/simple_annote.png" alt="image" /></p>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>我们实现电路时一般可遵循三步法:</p>
+<ol>
+<li>确定电路配置：需要几列</li>
+<li>确定好电路需要怎样的门:乘法门，还是自定义门，还是需要加 lookup。这样就可以实现 Circuit 的 <code>configure</code> 关联方法</li>
+<li>根据电路所需的输入输出，填充好 witness。这样就可以实现 Circuit 的 <code>synthesize</code> 关联方法</li>
+</ol>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><code>./halo2_proofs::plonk::Circuit</code></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>完整代码在 <a href="https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_1/simple.rs">halo2-tutorials: chap-1</a></p>
+</div>
+
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../halo2/chap-0/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../halo2/chap-2/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../halo2/chap-0/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../halo2/chap-2/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/mermaid.min.js"></script>
+        <script src="../../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>

@@ -1,0 +1,1168 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1-Simple Examples - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="halo2/tmp/1-Simple-Example.md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/chap-0/index.html">1-basic concepts</a></li><li class="chapter-item "><a href="../../halo2/chap-1/index.html">2-simple-circuit</a></li><li class="chapter-item "><a href="../../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item "><a href="../../halo2/chap-4/index.html">5-range-check</a></li><li class="chapter-item "><a href="../../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item expanded "><a href="../../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../halo2/tmp/1-Simple-Example.html" class="active">1-Simple Examples</a></li><li class="chapter-item "><a href="../../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item "><a href="../../halo2/tmp/6-Range-Check(code-explanation).html">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../materials/ZK-Materials.html">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/tmp/1-Simple-Example.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<p>author: <a href="https://github.com/Demian101">@Demian</a></p>
+<p>references: <a href="https://learn.0xparc.org/halo2/">https://learn.0xparc.org/halo2/</a></p>
+</blockquote>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90">简单例子</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89-instructions">定义 instructions</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E8%8A%AF%E7%89%87%E7%9A%84%E5%AE%9E%E7%8E%B0">定义芯片的实现</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E8%8A%AF%E7%89%87">配置芯片</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0-chip-traits">实现 chip Traits</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E7%94%B5%E8%B7%AF">构建电路</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%B5%E8%B7%AF">测试电路</a></li>
+</ul>
+</li>
+<li><a href="#code-ref--full-example">Code Ref / Full example</a></li>
+<li><a href="#references">References:</a></li>
+<li><a href="#------%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC-end-------">—– 中文版本 End ——</a></li>
+<li><a href="#simple-example">Simple Example</a>
+<ul>
+<li><a href="#define-instructions">Define instructions</a></li>
+<li><a href="#define-a-chip-implementation">Define a chip implementation</a></li>
+<li><a href="#configure-the-chip">Configure the chip</a></li>
+<li><a href="#implement-chip-traits">Implement chip Traits</a></li>
+<li><a href="#build-the-circuit">Build the Circuit</a></li>
+<li><a href="#testing-the-circuit">Testing the circuit</a></li>
+</ul>
+</li>
+<li><a href="#code-ref--full-example-1">Code Ref / Full example</a></li>
+<li><a href="#------%E9%97%AE%E9%A2%98-question------">—– 问题 Question —–</a></li>
+</ul>
+<h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
+<p><img src="imgs/1/Pastedimage20230912220538.png" alt="" /></p>
+<p><img src="imgs/1/Pastedimage20230912162739.png" alt="" /></p>
+<p><img src="./imgs/1/2023-08-25-050418.png" alt="" /></p>
+<h3 id="简单例子"><a class="header" href="#简单例子">简单例子</a></h3>
+<p>我们先从一个简单的电路开始，介绍常用的 API 以及它们的使用方法。 该电路将采用 public input <code>c</code>，并将证明两个 private inputs <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> 的知识，以使
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span></span></p>
+<h4 id="定义-instructions"><a class="header" href="#定义-instructions"><a href="https://zcash.github.io/halo2/user/simple-example.html#define-instructions">定义 instructions</a></a></h4>
+<p>首先，我们需要定义我们的电路所依赖的指令集(instructions)</p>
+<p>Instructions 介于 high-level gadgets 和底层的电路操作之间。指令既可以细粒度也可以粗粒度，但在实践中，指令的功能应当足够小，这样可以重复使用；但又要足够大，这样可以优化它的实现。设计者应当在这两者之间取得平衡</p>
+<p>对于我们的电路，我们将使用三个 instructions：</p>
+<ul>
+<li>将 private number 加载到电路中。</li>
+<li>两个数字相乘。</li>
+<li>将数字公开(Expose) 为电路的 public input。</li>
+</ul>
+<p>我们还需要一个代表数字的变量的类型(<code>type Num</code>)。指令接口(Instruction interfaces) 为其输入和输出提供关联类型(associated types)，以允许实现以对其优化目标最有意义的方式表示这些类型 (to allow the implementations to represent these in a way that makes the most sense for their optimization goals.)</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait NumericInstructions&lt;F: Field&gt;: Chip&lt;F&gt; {
+    /// Variable representing a number. 用于表示一个数的变量
+    type Num;
+
+    /// Loads a number into the circuit as a private input. 加载隐私输入
+    fn load_private(&amp;self, layouter: impl Layouter&lt;F&gt;, a: Value&lt;F&gt;) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Loads a number into the circuit as a fixed constant.
+    fn load_constant(&amp;self, layouter: impl Layouter&lt;F&gt;, constant: F) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Returns `c = a * b`.
+    fn mul(
+        &amp;self,
+        layouter: impl Layouter&lt;F&gt;,
+        a: Self::Num,
+        b: Self::Num,
+    ) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Exposes a number as a public input to the circuit.
+    /// 将一个数置为电路的公开输入
+    fn expose_public(
+        &amp;self,
+        layouter: impl Layouter&lt;F&gt;,
+        num: Self::Num,
+        row: usize,
+    ) -&gt; Result&lt;(), Error&gt;;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Among them,</p>
+<ul>
+<li><em>Num</em> 用于适配此 interface 中处理的类型</li>
+<li><em>load_private</em> 用于加载 witness</li>
+<li><em>load_constant</em> 用于加载常量 (constant)</li>
+<li><em>mul</em> 用于计算两个数字的乘法</li>
+<li><em>expose_public</em> 用于设置实例 (instance)</li>
+</ul>
+<h4 id="定义芯片的实现"><a class="header" href="#定义芯片的实现"><a href="https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation">定义芯片的实现</a></a></h4>
+<p>对于我们的电路，我们将构建一个<a href="https://zcash.github.io/halo2/concepts/chips.html">芯片(chip)</a>，在有限域上实现提到的 Numeric Instruction (<code>trait NumericInstructions</code>)</p>
+<blockquote>
+<p>如果您想开发自定义 chip，则需要去实现 Halo 2 的 <em>chip</em> Trait</p>
+<p>大多数时候，使用 Halo 2 进行电路开发不需要自己定义 Instructions 和 chip。 但如果你需要使用 Halo 2 没有提供的复杂算法，就需要自己实现（例如实现一种新兴的密码算法）。</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 这块芯片将实现我们的指令集 instructions！
+/// 芯片存储它们自己的配置，以及(如有必要的) 类型标记
+struct FieldChip&lt;F: Field&gt; {
+    config: FieldConfig,
+    _marker: PhantomData&lt;F&gt;,
+}
+<span class="boring">}</span></code></pre></pre>
+<p>每一个“芯片“类型<strong>都要实现 <code>Chip</code> trait</strong> , <code>Chip</code> trait 定义了 <code>Layouter</code> 在 synthesizing 电路时可能需要的关于电路的某些属性，以及若将该芯片加载到电路所需要设置的任何初始状态</p>
+<blockquote>
+<p>synthesizing 电路 : 一般指的是类似 R1CS 那种写约束的意思</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Every chip needs to implement the `Chip` trait !!
+impl&lt;F: FieldExt&gt; Chip&lt;F&gt; for FieldChip&lt;F&gt; {
+    type Config = FieldConfig;
+    type Loaded = ();
+
+    fn config(&amp;self) -&gt; &amp;Self::Config {
+        &amp;self.config
+    }
+
+    fn loaded(&amp;self) -&gt; &amp;Self::Loaded {
+        &amp;()
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="配置芯片"><a class="header" href="#配置芯片"><a href="https://zcash.github.io/halo2/user/simple-example.html#configure-the-chip">配置芯片</a></a></h4>
+<p>接下来需要为芯片 <code>chip</code> 配置好实现我们想要的功能所需要的那些列、置换、门（columns, permutations, and gates）：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 芯片 chip 的状态被存储在一个 FieldConfig 结构体中，它是在配置过程中由 chip 生成，
+/// 并且存储在芯片内部 (type Config = FieldConfig;)
+#[derive(Clone, Debug)]
+struct FieldConfig {
+    /// 对于这块芯片，我们将用到两个 advice 列来实现我们的指令集。
+    /// 它们也是我们与电路其他部分进行通信的列。
+    advice: [Column&lt;Advice&gt;; 2],
+    instance: Column&lt;Instance&gt;, // public input 列（instance）
+
+    // 我们需要一个 selector 来激活乘法门，在用不到 `NumericInstructions::mul`指令的 cells
+    // 上不设置任何约束。这非常重要，尤其在构建更大型的电路的情况下，列会被多条指令集用到
+    s_mul: Selector,
+}
+<span class="boring">}</span></code></pre></pre>
+<p>下面我们来构建约束 :</p>
+<ul>
+<li>最关键的函数 <em>configure</em> 和 <em>enable_equality</em> 用于检查传入参数的相等性</li>
+<li>如下图 : 在 <code>create_gate</code> 函数中 :
+<ul>
+<li>乘数 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span> 分别在同一行的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  advice 列  ;</li>
+<li>乘积 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>  和 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span> 同在 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 列, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span></span></span></span> 在 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>  的下一行 :</li>
+</ul>
+</li>
+<li>可以看到在代码中, 都是使用相对位置(relative position) 来描述的 !</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// | a0  | a1  | s_mul |
+// |-----|-----|-------|
+// | lhs | rhs | s_mul |
+// | out |     |       |
+let lhs = meta.query_advice(advice[0], Rotation::cur());
+let rhs = meta.query_advice(advice[1], Rotation::cur());
+let out = meta.query_advice(advice[0], Rotation::next()); // Attention !!
+<span class="boring">}</span></code></pre></pre>
+<p>最后函数返回多项式约束：</p>
+<ul>
+<li>若选择器(Selector) <code>s_mul</code> 不为 0，则<strong>激活</strong>校验乘法约束 :
+<ul>
+<li>当 <code>s_mul * (lhs * rhs - out) == 0</code>，则说明 <em>lhs * rhs = out</em> 约束成立；</li>
+<li>当 <code>s_mul * (lhs * rhs - out) != 0</code>，说明  <em>lhs * rhs = out</em> 约束不成立！！程序报错</li>
+</ul>
+</li>
+<li>若 <code>s_mul</code> 为 0，则<strong>不会激活</strong>检查乘法约束，any subsequent values are fine！</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: FieldExt&gt; FieldChip&lt;F&gt; {
+    fn construct(config: &lt;Self as Chip&lt;F&gt;&gt;::Config) -&gt; Self {
+        Self {
+            config,
+            _marker: PhantomData,
+        }
+    }
+
+    fn configure(
+        meta: &amp;mut ConstraintSystem&lt;F&gt;,
+        advice: [Column&lt;Advice&gt;; 2],
+        instance: Column&lt;Instance&gt;,
+        constant: Column&lt;Fixed&gt;,
+    ) -&gt; &lt;Self as Chip&lt;F&gt;&gt;::Config {
+        meta.enable_equality(instance);
+        meta.enable_constant(constant);
+        for column in &amp;advice {
+            meta.enable_equality(*column);
+        }
+        let s_mul = meta.selector();
+
+        // 定义我们的乘法门（multiplication gate）
+        meta.create_gate("mul", |meta| {
+            // To implement multiplication, we need 3 advice `cells`
+            // and 1 selector.  We arrange them like so:
+            //
+            // | a0  | a1  | s_mul |
+            // |-----|-----|-------|
+            // | lhs | rhs | s_mul |
+            // | out |     |       |
+            //
+            // 门可以用任意相对偏移(relative offsets)，但每一个 offset 都会增加证明的开销
+            // 最常见的偏移值 offset 是 0 (当前行), 1(下一行), -1(上一行)。
+            // 这 3 种情况 `Rotation` 都有特定的 constructors : cur/next/prev
+            let lhs = meta.query_advice(advice[0], Rotation::cur());
+            let rhs = meta.query_advice(advice[1], Rotation::cur());
+            let out = meta.query_advice(advice[0], Rotation::next());
+            let s_mul = meta.query_selector(s_mul);
+
+            // Finally, we return the polynomial expressions that constrain this gate.
+            // 最终，我们将约束门的多项式表达式返回. 对于目前的乘法门，仅需要一个多项式约束
+            //
+            // `create_gate` 函数返回的多项式表达式，在 proving system 中会被约束等于 0.
+            // 约束表达式有以下性质：
+            // - 当 s_mul = 0 时，lhs, rhs, out 可以是任意值。
+            // - 当 s_mul != 0 时，lhs, rhs, out 需要满足 lhs * rhs = out 这条约束。
+            vec![s_mul * (lhs * rhs - out)]
+        });
+
+        FieldConfig {
+            advice,
+            instance,
+            s_mul,
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>到目前为止，我们对电路的实现的大致过程是：</p>
+<ol>
+<li>定义一套指令集（NumericInstructions），这是一套操作码，用来控制“计算机“(芯片)</li>
+<li>变出一块芯片（定义在有限域上），就像是一块电路板</li>
+<li>有了”指令集“和”电路板“，我们可以选择一些元件来对该电路板子实现特定功能(struct FieldConfig)，例如，如果想实现声控功能，我们需要电容麦，模拟-数字转换器 (ADC)，二极管… 在 halo2 中，我们就需要选取需要的 column: advice/instance/constant/selectors ….</li>
+<li>有了这些元器件，我们需要按照执行逻辑将其连接起来(fn configure())</li>
+</ol>
+<p><img src="imgs/1/Pastedimage20230912220538.png" alt="" /></p>
+<h4 id="实现-chip-traits"><a class="header" href="#实现-chip-traits"><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html#%E5%AE%9E%E7%8E%B0%E8%8A%AF%E7%89%87%E5%8A%9F%E8%83%BD">实现 chip Traits</a></a></h4>
+<p>我们前面定义的 <code>instructions interface</code> 需要 implemention，定义 <code>NumericInstructions</code> 的实现就是封装 finite field elements.</p>
+<p>It should be noted that, 除了行和列之外，Cell 单元的位置还可以通过相对位置偏移(relative position offset) 来确定)</p>
+<blockquote>
+<p>Generally, there are <code>3</code> types of offsets, <code>0</code> representing the current position, <code>1</code> representing the next position, and <code>-1</code> representing the previous position.</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Number&lt;F: Field&gt;(AssignedCell&lt;F, F&gt;); /// 用于表示数的 struct
+
+impl&lt;F: FieldExt&gt; NumericInstructions&lt;F&gt; for FieldChip&lt;F&gt; {
+    type Num = Number&lt;F&gt;;
+    fn load_private(){ ... }
+    fn load_constant(){ ... }
+
+    fn mul(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        a: Self::Num,
+        b: Self::Num,
+    ) -&gt; Result&lt;Self::Num, Error&gt; {
+        let config = self.config();
+
+        layouter.assign_region(
+            || "mul",
+            |mut region: Region&lt;'_, F&gt;| {
+                // 在此 region 中，我们只想用一个乘法门，所以我们在 region offset=0 处激活它；
+                // 这意味着它将对 offsets 0 and 1 处的 2 个 cells 都进行约束(为啥？)
+                config.s_mul.enable(&amp;mut region, 0)?;
+
+                // 给我们的输入(a: Self::Num / b: Self::Num,) 有可能在电路的任何位置.
+                // 但在region 中，我们只能依靠相对偏移。所以我们需要在 region 内分配新的 cells
+                // 并限制新分配的 cells 的值 与输入(a: Self::Num / b: Self::Num,) 的值相等。
+                a.0.copy_advice(|| "lhs", &amp;mut region, config.advice[0], 0)?;
+                b.0.copy_advice(|| "rhs", &amp;mut region, config.advice[1], 0)?;
+
+                // 现在我们可以把乘积放到输出的位置了。
+                let value = a.0.value().copied() * b.0.value();
+
+				// 最后，我们对输出进行赋值，返回一个要在电路的另一部分使用的变量
+                region
+                    .assign_advice(|| "lhs * rhs", config.advice[0], 1, || value)
+                    .map(Number)
+            },
+        )
+    }
+    fn expose_public(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        num: Self::Num,
+        row: usize,
+    ) -&gt; Result&lt;(), Error&gt; {
+        let config = self.config();
+
+        layouter.constrain_instance(num.0.cell(), config.instance, row)
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="构建电路"><a class="header" href="#构建电路"><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html#%E6%9E%84%E9%80%A0%E7%94%B5%E8%B7%AF">构建电路</a></a></h4>
+<p>现在我们有了所需的指令以及实现它们的芯片，我们终于可以构建我们的电路了！</p>
+<p><strong>circuit</strong> Trait 是电路开发的入口。 我们需要定义自己的电路结构并访问 <em>witness</em> input</p>
+<p>struct <code>MyCircuit</code> :</p>
+<ul>
+<li>在这个结构体中，我们保存隐私输入变量。我们使用  <code>Option&lt;F&gt;</code> 类型是因为，在生成密钥阶段，他们不需要有任何的值。在证明阶段中，如果它们任一为 <code>None</code> 的话，将得到一个错误。</li>
+</ul>
+<p>The interfaces defined before are all used here. <em>configure</em> creates a storage column for advice/instance/constant. <em>synthesize</em> uses a custom chip to get the input witness and constant, and finally, calculate the result and return the public input.</p>
+<p>In fact, it can satisfy most scenarios by simply implementing the <em>circuit</em> trait for general circuit development. Some common functions of the chip have already been implemented in Halo 2.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Store the private input variables in this circuit.
+// Value&lt;F&gt; 用了 Option&lt;F&gt;,  因为在 key generation 阶段这个 struct 不会有值
+// 而在 Proving 阶段，如果任意位置为空就会 throw Error.
+struct MyCircuit&lt;F: Field&gt; {
+    constant: F,
+    a: Value&lt;F&gt;,
+    b: Value&lt;F&gt;,
+}
+
+impl&lt;F: Field&gt; Circuit&lt;F&gt; for MyCircuit&lt;F&gt; {
+    // 因为 we are using a single chip for everything，所以我们可以重用它的配置。
+    type Config = FieldConfig;  // 电路元件(column(advice/instance/selector..))
+    type FloorPlanner = SimpleFloorPlanner;
+
+    fn without_witnesses(&amp;self) -&gt; Self {
+        Self::default()
+    }
+
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self::Config {
+        // 我们创建两个 advice 列，作为 FieldChip 的 I/O.
+        let advice = [meta.advice_column(), meta.advice_column()];
+
+        // 我们还需要一个 instance 列来存储公开输入 public inputs.
+        let instance = meta.instance_column();
+
+        // 创建一个 fixed 列来加载常数 load constants.
+        let constant = meta.fixed_column();
+
+        FieldChip::configure(meta, advice, instance, constant)
+    }
+    // Prove a2⋅b2 = c
+    fn synthesize(
+        &amp;self,
+        config: Self::Config,
+        mut layouter: impl Layouter&lt;F&gt;,
+    ) -&gt; Result&lt;(), Error&gt; {
+        let field_chip = FieldChip::&lt;F&gt;::construct(config);
+
+        // 将我们的隐私值加载到电路中。
+        let a = field_chip.load_private(layouter.namespace(|| "load a"), self.a)?;
+        let b = field_chip.load_private(layouter.namespace(|| "load b"), self.b)?;
+
+        // 将常数因子加载到电路中
+        let constant =
+            field_chip.load_constant(layouter.namespace(|| "load constant"), self.constant)?;
+
+        // 我们仅有乘法可用，因此我们按以下方法实现电路：
+        //     asq  = a * a
+        //     bsq  = b * b
+        //     absq = asq * bsq
+        //     c    = constant * asq*bsq
+        //
+        // 但是，按下面的方法实现，更加高效:
+        //     ab   = a*b
+        //     absq = ab^2
+        //     c    = constant*absq
+        let ab = field_chip.mul(layouter.namespace(|| "a * b"), a, b)?;
+        let absq = field_chip.mul(layouter.namespace(|| "ab * ab"), ab.clone(), ab)?;
+        let c = field_chip.mul(layouter.namespace(|| "constant * absq"), constant, absq)?;
+
+        // 将结果作为电路的公开输入进行公开
+        field_chip.expose_public(layouter.namespace(|| "expose c"), c, 0)
+    }
+} }
+<span class="boring">}</span></code></pre></pre>
+<h4 id="测试电路"><a class="header" href="#测试电路"><a href="https://zcash.github.io/halo2/user/simple-example.html#testing-the-circuit">测试电路</a></a></h4>
+<p>我们在 chapter about tools 中提到的 <em>MockProver</em> 和 <em>CircuitLayout</em> 可以派上用场</p>
+<p>可以用 <code>halo2::dev::MockProver</code> 来测试一个电路是否正常工作。构造电路的一组 Private/Public input ，这组输入可直接用来计算合法证明，但我们把这组输入传入到 <code>MockProver::run</code> 函数中之后，就能得到一个可用于检验电路中每一条约束是否满足的对象。而且电路验证不过，这个对象还能输出那条不满足的约束</p>
+<p>如下代码 , <code>MockProver::run</code>  中只知道 Public input <code>c</code> , 他并不知道 Private 是什么, 但仍可以进行验证</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 我们电路的行数不能超过 2^k. 因为我们的示例电路很小，我们选择一个较小的值
+    let k = 4;
+
+    // 准备好电路的隐私输入和公开输入
+    let constant = Fp::from(7);
+    let a = Fp::from(2);
+    let b = Fp::from(3);
+    let c = constant * a.square() * b.square();  // 算出来
+
+    // 用隐私输入来实例化电路
+    let circuit = MyCircuit {
+        constant,
+        a: Value::known(a),
+        b: Value::known(b),
+    };
+
+    // 将公开输入进行排列。乘法的结果被我们放置在 instance 列的第0行，
+    // 所以我们把它放在公开输入的对应位置。
+    let mut public_inputs = vec![c];
+
+    // 给定正确的公开输入，我们的电路能验证通过
+    let prover = MockProver::run(k, &amp;circuit, vec![public_inputs.clone()]).unwrap();
+    assert_eq!(prover.verify(), Ok(()));
+
+    // 如果我们尝试用其他的公开输入(此处是 +1)，证明将失败！
+    public_inputs[0] += Fp::one();
+    let prover = MockProver::run(k, &amp;circuit, vec![public_inputs]).unwrap();
+    assert!(prover.verify().is_err());
+}</code></pre></pre>
+<h3 id="code-ref--full-example"><a class="header" href="#code-ref--full-example">Code Ref / <a href="https://zcash.github.io/halo2/user/simple-example.html#full-example">Full example</a></a></h3>
+<p>You can find the source code for this example <a href="https://github.com/zcash/halo2/tree/main/halo2_proofs/examples/simple-example.rs">here</a>.</p>
+<pre><code class="language-bash">cargo run --example simple-example
+</code></pre>
+<h3 id="references"><a class="header" href="#references">References:</a></h3>
+<ul>
+<li><a href="https://github.com/jasonmorton/halo2-examples/blob/master/src/fibonacci/example1.rs">Jason Morton halo2 codes</a></li>
+<li><a href="https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation">ZCash halo2 books</a></li>
+<li><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html">trapdoor-tech halo2 book</a></li>
+<li><a href="https://github.com/icemelon/halo2-examples/blob/master/src/fibonacci/example3.rs">icemelon/HaiCheng Shen</a></li>
+<li><a href="https://learn.0xparc.org/">0xPARC halo2</a></li>
+</ul>
+<h3 id="-中文版本-end-"><a class="header" href="#-中文版本-end-">—– 中文版本 End ——</a></h3>
+<h3 id="simple-example"><a class="header" href="#simple-example">Simple Example</a></h3>
+<p>Let’s start with a simple circuit, to introduce you to the common APIs and how they are used. The circuit will take a public input c, and will prove knowledge of two private inputs <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span> such that
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span></span></p>
+<h4 id="define-instructions"><a class="header" href="#define-instructions"><a href="https://zcash.github.io/halo2/user/simple-example.html#define-instructions">Define instructions</a></a></h4>
+<p>Instructions are the boundary between high-level <a href="https://zcash.github.io/halo2/concepts/gadgets.html">gadgets</a> and the low-level circuit operations. Instructions may be as coarse or as granular as desired, but in practice you want to strike a balance between an instruction being large enough to effectively optimize its implementation, and small enough that it is meaningfully reusable.</p>
+<p>For our circuit, we will use three instructions:</p>
+<ul>
+<li>Load a private number into the circuit.</li>
+<li>Multiply two numbers.</li>
+<li>Expose a number as a public input to the circuit. (将一个数设置为电路的公开输入)</li>
+</ul>
+<p>We also need a type for a variable representing a number. Instruction interfaces provide associated types for their inputs and outputs, to allow the implementations to represent these in a way that makes the most sense for their optimization goals.
+我们还需要一个代表数字的变量的类型。指令接口为其输入和输出提供关联类型，以允许实现以对其优化目标最有意义的方式表示这些类型</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>trait NumericInstructions&lt;F: Field&gt;: Chip&lt;F&gt; {
+    /// Variable representing a number. 用于表示一个数的变量
+    type Num;
+
+    /// Loads a number into the circuit as a private input. 隐私输入
+    fn load_private(&amp;self, layouter: impl Layouter&lt;F&gt;, a: Value&lt;F&gt;) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Loads a number into the circuit as a fixed constant.
+    fn load_constant(&amp;self, layouter: impl Layouter&lt;F&gt;, constant: F) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Returns `c = a * b`.
+    fn mul(
+        &amp;self,
+        layouter: impl Layouter&lt;F&gt;,
+        a: Self::Num,
+        b: Self::Num,
+    ) -&gt; Result&lt;Self::Num, Error&gt;;
+
+    /// Exposes a number as a public input to the circuit.
+    /// 将一个数置为电路的公开输入
+    fn expose_public(
+        &amp;self,
+        layouter: impl Layouter&lt;F&gt;,
+        num: Self::Num,
+        row: usize,
+    ) -&gt; Result&lt;(), Error&gt;;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Among them,</p>
+<ul>
+<li><em>Num</em> is used to adapt to the type handled in this interface, (适配该接口中处理的类型)</li>
+<li><em>load_private</em> is used to load witness,</li>
+<li><em>load_constant</em> is used to load constants, </li>
+<li><em>mul</em> is used to calculate the multiplication of two numbers, and </li>
+<li><em>expose_public</em> is used to set instance.</li>
+</ul>
+<h4 id="define-a-chip-implementation"><a class="header" href="#define-a-chip-implementation"><a href="https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation">Define a chip implementation</a></a></h4>
+<p>定义芯片的实现 : For our circuit, we will build a <a href="https://zcash.github.io/halo2/concepts/chips.html">chip</a> that provides the above numeric instructions for a finite field.</p>
+<p>If you want to develop a custom chip, you need to implement the <em>chip</em> trait of Halo 2.</p>
+<p>Most of the time, using Halo 2 for circuit development does not need to define instructions and chips by oneself. But if you need to use complex ones that Halo 2 does not provide, you need to implement them yourself, such as implementing an emerging(新兴的) cryptographic algorithm.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// 这块芯片将实现我们的指令集！芯片存储它们自己的配置，
+struct FieldChip&lt;F: Field&gt; {
+    config: FieldConfig,
+    _marker: PhantomData&lt;F&gt;,
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Every chip needs to implement the  <code>Chip</code>  trait.  This defines the properties of the chip that a <code>Layouter</code> may rely on when synthesizing a circuit, as well as enabling any initial state that the chip requires to be loaded into the circuit.
+每一个“芯片“类型都要实现 <code>Chip</code> trait , <code>Chip</code> trait 定义了 <code>Layouter</code> 在 synthesizing 电路时可能需要的关于电路的某些属性，以及若将该芯片加载到电路所需要设置的任何初始状态</p>
+<blockquote>
+<p>synthesizing 电路 : 一般指的是类似 R1CS 那种写约束的意思</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: FieldExt&gt; Chip&lt;F&gt; for FieldChip&lt;F&gt; {
+    type Config = FieldConfig;
+    type Loaded = ();
+
+    fn config(&amp;self) -&gt; &amp;Self::Config {
+        &amp;self.config
+    }
+
+    fn loaded(&amp;self) -&gt; &amp;Self::Loaded {
+        &amp;()
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="configure-the-chip"><a class="header" href="#configure-the-chip"><a href="https://zcash.github.io/halo2/user/simple-example.html#configure-the-chip">Configure the chip</a></a></h4>
+<p>The chip needs to be configured with the columns, permutations, and gates that will be required to implement all of the desired instructions.  (需要为芯片配置好实现我们想要的功能所需要的那些列、置换、门) :</p>
+<pre><pre class="playground"><code class="language-rust">#![allow(unused)]
+fn main() {
+/// 芯片的状态被存储在一个 config 结构体中，它是在配置过程中由芯片生成，
+/// 并且存储在芯片内部。
+#[derive(Clone, Debug)]
+struct FieldConfig {
+    /// 对于这块芯片，我们将用到两个 advice 列来实现我们的指令集。
+    /// 它们也是我们与电路的其他部分通信所需要用到列。
+    advice: [Column&lt;Advice&gt;; 2],
+    instance: Column&lt;Instance&gt;, //公开输入（instance）列
+
+    // 我们需要一个 selector 来激活乘法门，从而在用不到`NumericInstructions::mul`指令的
+    //cells 上不设置任何约束。这非常重要，尤其在构建更大型的电路的情况下，列会被多条指令集用到
+    s_mul: Selector,
+
+    /// 用来加载常数的 fixed 列
+    constant: Column&lt;Fixed&gt;,
+}</code></pre></pre>
+<p>下面我们来构建约束 :</p>
+<ul>
+<li>the most critical functions <em>configure</em> and <em>enable_equality</em> are used to check the equality of the incoming parameters(传入的参数).</li>
+<li>如下图 : 在 <code>create_gate</code> 函数中 :
+<ul>
+<li>乘数 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span></span></span></span> 分别在同一行的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  advice 列  ;</li>
+<li>乘积 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>  和 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span> 同在 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 列, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">t</span></span></span></span> 在 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>  的下一行 :</li>
+</ul>
+</li>
+<li>可以看到在代码中, 都是使用 相对位置来描述的 !</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// | a0  | a1  | s_mul |
+// |-----|-----|-------|
+// | lhs | rhs | s_mul |
+// | out |     |       |
+let lhs = meta.query_advice(advice[0], Rotation::cur());
+let rhs = meta.query_advice(advice[1], Rotation::cur());
+let out = meta.query_advice(advice[0], Rotation::next()); // Attention !!
+<span class="boring">}</span></code></pre></pre>
+<p>最后函数返回多项式约束：</p>
+<ul>
+<li>若 <code>s_mul</code> 不为 0，则<strong>激活</strong>校验乘法约束 :
+<ul>
+<li>当 <code>s_mul * (lhs * rhs - out) == 0</code>，则 <em>lhs * rhs = out</em> 约束成立；</li>
+<li>当 <code>s_mul * (lhs * rhs - out) != 0</code>， <em>lhs * rhs = out</em> 约束不成立；程序报错</li>
+</ul>
+</li>
+<li>若 <code>s_mul</code> 为 0，则<strong>不会激活</strong>检查乘法约束，any subsequent values are fine</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: FieldExt&gt; FieldChip&lt;F&gt; {
+    fn construct(config: &lt;Self as Chip&lt;F&gt;&gt;::Config) -&gt; Self {
+        Self {
+            config,
+            _marker: PhantomData,
+        }
+    }
+
+    fn configure(
+        meta: &amp;mut ConstraintSystem&lt;F&gt;,
+        advice: [Column&lt;Advice&gt;; 2],
+        instance: Column&lt;Instance&gt;,
+        constant: Column&lt;Fixed&gt;,
+    ) -&gt; &lt;Self as Chip&lt;F&gt;&gt;::Config {
+        meta.enable_equality(instance.into());
+        meta.enable_constant(constant);
+        for column in &amp;advice {
+            meta.enable_equality((*column).into());
+        }
+        let s_mul = meta.selector();
+
+        // 定义我们的乘法门
+        meta.create_gate("mul", |meta| {
+            // To implement multiplication, we need 3 advice `cells`
+            // and 1 selector.  We arrange them like so:
+            //
+            // | a0  | a1  | s_mul |
+            // |-----|-----|-------|
+            // | lhs | rhs | s_mul |
+            // | out |     |       |
+            //
+            // 门可以用任一相对偏移，但每一个不同的偏移都会对证明增加开销。
+            // 最常见的偏移值是 0 (当前行), 1(下一行), -1(上一行)。
+            // 针对这三种情况，有特定的构造函数来构造`Rotation` 结构。
+            let lhs = meta.query_advice(advice[0], Rotation::cur());
+            let rhs = meta.query_advice(advice[1], Rotation::cur());
+            let out = meta.query_advice(advice[0], Rotation::next());
+            let s_mul = meta.query_selector(s_mul);
+
+            // 最终，我们将约束门的多项式表达式返回。
+            // 对于我们的乘法门，我们仅需要一个多项式约束。
+            //
+            // `create_gate` 函数返回的多项式表达式，在证明系统中一定等于0。
+            // 我们的表达式有以下性质：
+            // - 当 s_mul = 0 时，lhs, rhs, out 可以是任意值。
+            // - 当 s_mul != 0 时，lhs, rhs, out 将满足 lhs * rhs = out 这条约束。
+            vec![s_mul * (lhs * rhs - out)]
+        });
+
+        FieldConfig {
+            advice,
+            instance,
+            s_mul,
+            constant,
+        }
+    }
+}
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="implement-chip-traits"><a class="header" href="#implement-chip-traits"><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html#%E5%AE%9E%E7%8E%B0%E8%8A%AF%E7%89%87%E5%8A%9F%E8%83%BD">Implement chip Traits</a></a></h4>
+<p>The <code>instructions interface</code> we defined earlier needs to be implemented, and defining the implementation of Number is to en<strong>capsul</strong>ate(封装) finite field elements.</p>
+<p>It should be noted that, in addition to row and column, the position of the cell can also be determined by the relative position offset  (除了行和列之外，单元的位置还可以通过相对位置偏移来确定).</p>
+<p>Generally, there are <code>3</code> types of offsets, 0 representing the current position, <code>1</code> representing the next position, and <code>-1</code> representing the previous position.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// A variable representing a number.
+#[derive(Clone)]
+struct Number&lt;F: Field&gt;(AssignedCell&lt;F, F&gt;);
+
+impl&lt;F: Field&gt; NumericInstructions&lt;F&gt; for FieldChip&lt;F&gt; {
+    type Num = Number&lt;F&gt;;
+    fn load_private(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        value: Value&lt;F&gt;,
+    ) -&gt; Result&lt;Self::Num, Error&gt; {
+        let config = self.config();
+
+        layouter.assign_region(
+            || "load private",
+            |mut region| {
+                region
+                    .assign_advice(|| "private input", config.advice[0], 0, || value)
+                    .map(Number)
+            },
+        )
+    }
+
+    fn load_constant(
+        &amp;self,
+        mut layouter: impl Layouter&lt;F&gt;,
+        constant: F,
+    ) -&gt; Result&lt;Self::Num, Error&gt; {
+        let config = self.config();
+
+        layouter.assign_region(
+            || "load constant",
+            |mut region| {
+                region
+                    .assign_advice_from_constant(|| "constant value", config.advice[0], 0, constant)
+                    .map(Number)
+            },
+        )
+    }
+
+	fn mul(
+		&amp;self,
+		mut layouter: impl Layouter&lt;F&gt;,
+		a: Self::Num,
+		b: Self::Num,
+	) -&gt; Result&lt;Self::Num, Error&gt; {
+		let config = self.config();
+
+		layouter.assign_region(
+			|| "mul",
+			|mut region: Region&lt;'_, F&gt;| {
+				// We only want to use a single multiplication gate in this region,
+				// so we enable it at region offset 0; this means it will constrain
+				// cells at offsets 0 and 1.
+				config.s_mul.enable(&amp;mut region, 0)?;
+
+				// The inputs we've been given could be located anywhere in the circuit,
+				// but we can only rely on relative offsets inside this region. So we
+				// assign new cells inside the region and constrain them to have the
+				// same values as the inputs.
+				a.0.copy_advice(|| "lhs", &amp;mut region, config.advice[0], 0)?;
+				b.0.copy_advice(|| "rhs", &amp;mut region, config.advice[1], 0)?;
+
+				// Now we can assign the multiplication result, which is to be assigned
+				// into the output position.
+				let value = a.0.value().copied() * b.0.value();
+
+				// Finally, we do the assignment to the output, returning a
+				// variable to be used in another part of the circuit.
+				region
+					.assign_advice(|| "lhs * rhs", config.advice[0], 1, || value)
+					.map(Number)
+			},
+		)
+	}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="build-the-circuit"><a class="header" href="#build-the-circuit"><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html#%E6%9E%84%E9%80%A0%E7%94%B5%E8%B7%AF">Build the Circuit</a></a></h4>
+<p>既然我们已经有了所需要的指令，以及一块实现了这些指令的芯片，我们终于可以构造示例电路啦</p>
+<p>The <strong>circuit</strong> trait is the entrance to the circuit development. We need to define our own circuit structure and access the <em>witness</em> input.</p>
+<p>struct <code>MyCircuit</code> :</p>
+<ul>
+<li>在这个结构体中，我们保存隐私输入变量。我们使用  <code>Option&lt;F&gt;</code> 类型是因为，在生成密钥阶段，他们不需要有任何的值。在证明阶段中，如果它们任一为 <code>None</code> 的话，将得到一个错误。</li>
+</ul>
+<p>The interfaces defined before are all used here. <em>configure</em> creates a storage column for advice/instance/constant. <em>synthesize</em> uses a custom chip to get the input witness and constant, and finally, calculate the result and return the public input.</p>
+<p>In fact, it can satisfy most scenarios by simply implementing the <em>circuit</em> trait for general circuit development. Some common functions of the chip have already been implemented in Halo 2.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyCircuit&lt;F: FieldExt&gt; {
+    constant: F,
+    a: Option&lt;F&gt;,
+    b: Option&lt;F&gt;,
+}
+
+impl&lt;F: FieldExt&gt; Circuit&lt;F&gt; for MyCircuit&lt;F&gt; {
+    // 因为我们在任一地方值用了一个芯片，所以我们可以重用它的配置。
+    type Config = FieldConfig;
+    type FloorPlanner = SimpleFloorPlanner;
+
+    fn without_witnesses(&amp;self) -&gt; Self {
+        Self::default()
+    }
+
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self::Config {
+        // 我们创建两个 advice 列，作为 FieldChip 的输入。
+        let advice = [meta.advice_column(), meta.advice_column()];
+
+        // 我们还需要一个 instance 列来存储公开输入。
+        let instance = meta.instance_column();
+
+        // 创建一个 fixed 列来加载常数
+        let constant = meta.fixed_column();
+
+        FieldChip::configure(meta, advice, instance, constant)
+    }
+    // Prove a2⋅b2 = c
+    fn synthesize(
+        &amp;self,
+        config: Self::Config,
+        mut layouter: impl Layouter&lt;F&gt;,
+    ) -&gt; Result&lt;(), Error&gt; {
+        let field_chip = FieldChip::&lt;F&gt;::construct(config);
+
+        // 将我们的隐私值加载到电路中。
+        let a = field_chip.load_private(layouter.namespace(|| "load a"), self.a)?;
+        let b = field_chip.load_private(layouter.namespace(|| "load b"), self.b)?;
+
+        // 将常数因子加载到电路中
+        let constant =
+            field_chip.load_constant(layouter.namespace(|| "load constant"), self.constant)?;
+
+        // 我们仅有乘法可用，因此我们按以下方法实现电路：
+        //     asq  = a*a
+        //     bsq  = b*b
+        //     absq = asq*bsq
+        //     c    = constant*asq*bsq
+        //
+        // 但是，按下面的方法实现，更加高效:
+        //     ab   = a*b
+        //     absq = ab^2
+        //     c    = constant*absq
+        let ab = field_chip.mul(layouter.namespace(|| "a * b"), a, b)?;
+        let absq = field_chip.mul(layouter.namespace(|| "ab * ab"), ab.clone(), ab)?;
+        let c = field_chip.mul(layouter.namespace(|| "constant * absq"), constant, absq)?;
+
+        // 将结果作为电路的公开输入进行公开
+        field_chip.expose_public(layouter.namespace(|| "expose c"), c, 0)
+    }
+} }
+<span class="boring">}</span></code></pre></pre>
+<h4 id="testing-the-circuit"><a class="header" href="#testing-the-circuit"><a href="https://zcash.github.io/halo2/user/simple-example.html#testing-the-circuit">Testing the circuit</a></a></h4>
+<p>The <em>MockProver</em> and <em>CircuitLayout</em> that we mentioned in the chapter about tools can come in handy (派上用场).</p>
+<p>可以用 <code>halo2::dev::MockProver</code> 来测试一个电路是否正常工作。构造电路的一组 Private/Public input ，这组输入可直接用来计算合法证明，但我们把这组输入传入到 <code>MockProver::run</code> 函数中之后，就能得到一个可用于检验电路中每一条约束是否满足的对象。而且电路验证不过，这个对象还能输出那条不满足的约束</p>
+<p>如下代码 , <code>MockProver::run</code>  中只知道 Public input <code>c</code> , 他并不知道 Private 是什么, 但仍可以进行验证</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    // 我们电路的行数不能超过 2^k. 因为我们的示例电路很小，我们选择一个较小的值
+    let k = 4;
+
+    // 准备好电路的隐私输入和公开输入
+    let constant = Fp::from(7);
+    let a = Fp::from(2);
+    let b = Fp::from(3);
+    let c = constant * a.square() * b.square();  // 算出来
+
+    // 用隐私输入来实例化电路
+    let circuit = MyCircuit {
+        constant,
+        a: Value::known(a),
+        b: Value::known(b),
+    };
+
+    // 将公开输入进行排列。乘法的结果被我们放置在 instance 列的第0行，
+    // 所以我们把它放在公开输入的对应位置。
+    let mut public_inputs = vec![c];
+
+    // 给定正确的公开输入，我们的电路能验证通过
+    let prover = MockProver::run(k, &amp;circuit, vec![public_inputs.clone()]).unwrap();
+    assert_eq!(prover.verify(), Ok(()));
+
+    // 如果我们尝试用其他的公开输入(此处是 +1)，证明将失败！
+    public_inputs[0] += Fp::one();
+    let prover = MockProver::run(k, &amp;circuit, vec![public_inputs]).unwrap();
+    assert!(prover.verify().is_err());
+}</code></pre></pre>
+<h3 id="code-ref--full-example-1"><a class="header" href="#code-ref--full-example-1">Code Ref / <a href="https://zcash.github.io/halo2/user/simple-example.html#full-example">Full example</a></a></h3>
+<p>You can find the source code for this example <a href="https://github.com/zcash/halo2/tree/main/halo2_proofs/examples/simple-example.rs">here</a>.</p>
+<pre><code class="language-bash">cargo run --example simple-example
+</code></pre>
+<h3 id="-问题-question-"><a class="header" href="#-问题-question-">—– 问题 Question —–</a></h3>
+<ol>
+<li></li>
+</ol>
+<p>这意味着它将对 offsets 0 and 1 处的 2 个 cells 都进行约束(为啥？)</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>config.s_mul.enable(&amp;mut region, 0)?;
+<span class="boring">}</span></code></pre></pre>
+<ol start="2">
+<li></li>
+</ol>
+<p>奇怪的一点是，在 <code>fn mul() </code>函数中，既然已经使用了参数 a: Self::Num, b: Self::Num, 设置了 lhs Cell 和 rhs Cell，那么 a.cell 和 lhs、 b.cell 和 rhs 肯定就是相等的，为什么还要再 region.constrain_equal 约束一次呢？这个约束看起来是多余的且没有必要的？</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 在此 region 中，我们只想用一个乘法门，所以我们在 region offset=0 处激活它；
+// 这意味着它将对 offsets 0 and 1 处的 2 个 cells 都进行约束(为啥？)
+config.s_mul.enable(&amp;mut region, 0)?;
+
+// 给我们的输入有可能在电路的任一位置，但在当前 region 中，我们仅可以用
+// 相对偏移。所以，我们在 region 内分配新的 cells 并限定他们的值与输入 cells 的值相等。
+let lhs = region.assign_advice(
+	|| "lhs",
+	config.advice[0], // 第 0 列 (advice 列)
+	0,                // 第 0 行
+	|| a.value.ok_or(Error::SynthesisError), // 放 a 的值进去
+)?;
+let rhs = region.assign_advice(
+	|| "rhs",
+	config.advice[1], // 第 1 列,
+	0,                // 第 0 行
+	|| b.value.ok_or(Error::SynthesisError),
+)?;
+region.constrain_equal(a.cell, lhs)?;
+region.constrain_equal(b.cell, rhs)?;
+<span class="boring">}</span></code></pre></pre>
+<p>GPT：</p>
+<blockquote>
+<p>虽然 <code>lhs</code> 和 <code>rhs</code> 的值被设置为 <code>a.value</code> 和 <code>b.value</code>，但是这并不意味着它们在电路中是相等的。在电路的布局中，<code>a.cell</code> 和 <code>b.cell</code> 可能已经在其他位置被（意外地）赋值和约束过了。而在这个新的区域（region）中，为了进行乘法操作，你需要确保新分配的 <code>lhs</code> 和 <code>rhs</code> cells 与原始的 <code>a.cell</code> 和 <code>b.cell</code> 相等</p>
+<p>这就是为什么 <code>region.constrain_equal</code> 是必要的：它确保了在这个区域（region）中的计算使用了正确的输入值</p>
+<p>你可以将其视为一个安全性保障。如果没有这个约束，有可能会有其他的值进入这个区域，并可能导致电路生成错误的结果。通过加入这个约束，你确保了乘法操作是在正确的值上进行的。</p>
+</blockquote>
+<p>目前的 halo2_proofs，一般直接使用 <code>copy_advice</code>：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span><span class="boring">}</span></code></pre></pre>
+<footer id="open-on-gh">Found a bug?! <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/tmp/1-Simple-Example.md">Edit this page on GitHub.</a></footer>
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../halo2/tmp/halo2-learning-materials.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../halo2/tmp/2-Fibonacci-example-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../halo2/tmp/halo2-learning-materials.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../halo2/tmp/2-Fibonacci-example-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/mermaid.min.js"></script>
+        <script src="../../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>

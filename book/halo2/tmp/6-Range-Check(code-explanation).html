@@ -1,0 +1,629 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>6-Range Check (code explanation) - World of Z2O-K7E</title>
+
+
+        <!-- Custom HTML head -->
+        <meta property="og:title" content="halo2/tmp/6-Range-Check(code-explanation).md" />
+        <meta name="description" content="零知世界, Halo2 Tutorial, world of Zero-knowledge proof, Halo2 教程">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/css/open-in.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">🌟 About z2o-k7e  /zu:ˈki:/</a></li><li class="chapter-item affix "><a href="../../vision.html">🚩 Our Vision & Roadmap</a></li><li class="chapter-item affix "><a href="../../how-to-contribute.html">📖 How-to-contribute</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><a href="../../beginner.html">ZKP 新手村入门攻略</a></li><li class="chapter-item affix "><a href="../../zk-everything/zk-everything-Jade/Hello_ZKP.html">Hello ZKP</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-intro/toc.html">探索零知识证明系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-intro/1/zkp-back.html">（一）初识「零知识」与「证明」</a></li><li class="chapter-item "><a href="../../zkp-intro/2/zkp-simu.html">（二）理解「模拟」</a></li><li class="chapter-item "><a href="../../zkp-intro/3/zkp-pok.html">（三）寻找「知识」</a></li><li class="chapter-item "><a href="../../zkp-intro/4/zkp-rom.html">（四）随机「挑战」</a></li><li class="chapter-item "><a href="../../zkp-intro/5/zkp-crs.html">（五）埋藏「秘密」</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-snarks/toc.html">从零开始学习 zk-SNARK</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-snarks/1-Polynomial-Interaction-and-Proof.html">1-Polynomial-Interaction-and-Proof</a></li><li class="chapter-item "><a href="../../zk-snarks/2-Non-interactivity&Distributed-Setup.html">2-Non-interactivity&Distributed-Setup</a></li><li class="chapter-item "><a href="../../zk-snarks/3-General-Purpose-Computation.html">3-General-Purpose-Computation</a></li><li class="chapter-item "><a href="../../zk-snarks/4-Construction-Properties.html">4-Construction-Properties.md</a></li><li class="chapter-item "><a href="../../zk-snarks/5-Pinocchio-Protocol.html">5-Pinocchio-Protocol</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-intro.html">理解 Plonk 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-arithmetization.html">1-Plonkish Arithmetization</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lagrange-basis.html">2-多项式编码</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-permutation.html">3-置换证明</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-constraints.html">4-算术约束与拷贝约束</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-polycom.html">5-多项式承诺</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-randomizing.html">6-实现 Zero Knowledge</a></li><li class="chapter-item "><a href="../../plonk-intro-cn/plonk-lookup.html">7-Lookup Gate</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../lasso-zh/lasso-intro.html">理解 Lasso 系列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../lasso-zh/lasso-0.html">理解 Lasso（零）：带索引的查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-1.html">理解 Lasso（一）：Offline Memory Checking</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-2.html">理解 Lasso (二)：稀疏向量与 Tensor 结构</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-3.html">理解 Lasso (三)：大表格的稀疏查询证明</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-4.html">理解 Lasso (四)：更多的可分解表格</a></li><li class="chapter-item "><a href="../../lasso-zh/lasso-5.html">理解 Lasso (五)：表格的 MLE 结构</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../halo2/halo2.html">Halo2 Tutorial</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/chap-0/index.html">1-basic concepts</a></li><li class="chapter-item "><a href="../../halo2/chap-1/index.html">2-simple-circuit</a></li><li class="chapter-item "><a href="../../halo2/chap-2/index.html">3-custom-gate</a></li><li class="chapter-item "><a href="../../halo2/chap-3/index.html">4-fibonacci</a></li><li class="chapter-item "><a href="../../halo2/chap-4/index.html">5-range-check</a></li><li class="chapter-item "><a href="../../halo2/cost-model.html">6-cost-model</a></li><li class="chapter-item "><a href="../../halo2/halo2-QA.html">halo2-QA</a></li><li class="chapter-item "><a href="../../halo2/tmp/halo2-learning-materials.html">halo2-learning-materials</a></li><li class="chapter-item expanded "><a href="../../halo2/tmp/halo2-learning-materials.html">learning-halo2 (0xPARC)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/1-Simple-Example.html">1-Simple Examples</a></li><li class="chapter-item "><a href="../../halo2/tmp/2-Fibonacci-example-1.html">2-Fibonacci-example-1</a></li><li class="chapter-item "><a href="../../halo2/tmp/3-Fibonacci-example-2.html">3-Fibonacci-example-2</a></li><li class="chapter-item "><a href="../../halo2/tmp/4-IsZero-Check-example-3.html">4-IsZero Check-example-3</a></li><li class="chapter-item "><a href="../../halo2/tmp/5-Range-check.html">5-Range check-example-1.md</a></li><li class="chapter-item expanded "><a href="../../halo2/tmp/6-Range-Check(code-explanation).html" class="active">6-Range Check (code explanation)</a></li><li class="chapter-item "><a href="../../halo2/tmp/7-Range-Check-lookup(example-2).html">7-Range Check-Lookup-example-2)</a></li><li class="chapter-item "><a href="../../halo2/tmp/8-Range-Check(example-3).html">8-Range Check-Lookup-example-3)</a></li><li class="chapter-item "><a href="../../halo2/tmp/9-decomposed.html">9-Range Check-Decompose)</a></li><li class="chapter-item "><a href="../../halo2/tmp/ZKP-APP.html">ZKP Apps with halo2</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../halo2/tmp/Zordle.html">Zordle</a></li><li class="chapter-item "><a href="../../halo2/tmp/Hammster.html">Hammster</a></li></ol></li></ol></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-based Crypography</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.html">Lattice-1-Basic</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.html">Lattice-2-LLL</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.html">Lattice-3-CVP</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-Xor0v0/Lattice-4-RSA.html">Lattice-4-RSA</a></li></ol></li><li class="chapter-item "><a href="../../zkp-QA.html">Recurrent Q&A</a></li><li class="chapter-item "><a href="../../zk-everything/toc.html">zk-everything</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zk-everything/BabySNARK tutorial.html">BabySNARK tutorial</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/KZG.html">KZG</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html">Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html">Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html">Lecture12:ZKEVM</a></li><li class="chapter-item "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html">Lecture16:Hardware acceleration</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/GKR_with_ZK_Argument.html">Spartan preliminary: GKR with ZK Argument</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Hyrax.html">Spartan preliminary: Hyrax</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Spartan.html">Spartan In Depth</a></li><li class="chapter-item "><a href="../../zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.html">BLS12-381 理论与实现</a></li><li class="chapter-item "><a href="../../Nova/SuperNova.html">SuperNova</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../public goods/toc.html">ZKP Public Goods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../public goods/第二章.html">ch2</a></li><li class="chapter-item "><a href="../../public goods/4-Proving-System.html">ch4-Proving System</a></li><li class="chapter-item "><a href="../../public goods/5-plonk-intro.html">ch5-plonk-intro</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../materials/ZK-Materials.html">ZK Materials</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item "><a href="../../exp/toc.html">经验心得</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../exp/guoyu.html">郭宇：ZK 技术的学习心得和经验分享</a></li><li class="chapter-item "><a href="../../exp/freeyao.html">对话姚翔：解读零知识证明的前世今生</a></li><li class="chapter-item "><a href="../../https://zhuanlan.zhihu.com/p/268305208.html">邓燚：零知识，模拟与归约（一个个人化的视角）</a></li></ol></li><li class="chapter-item "><li class="spacer"></li><li class="chapter-item "><a href="../../zkp-space/toc.html">ZKP Space</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../zkp-space/2023-10-22-zkp-coprocessor.html">2023.10.12: 聊聊 ZKP Coprocessor</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">World of Z2O-K7E</h1>
+
+                    <div class="right-buttons">
+                        <button id="lang-toggle" class="icon-button" type="button" title="Change Language" aria-label="Change Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-list">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <ul id="lang-list" class="theme-popup" style="left: auto;" aria-label="Languages" role="menu">
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-cn">中文</a></button></li>
+                            <li role="none"><button role="menuitem" class="theme"><a id="lang-en">English</a></button></li>
+                        </ul>
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/tmp/6-Range-Check(code-explanation).md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<blockquote>
+<p>author: <a href="https://github.com/Demian101">@Demian</a></p>
+<p>references: https://learn.0xparc.org/materials/halo2</p>
+</blockquote>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#imports">imports</a></li>
+<li><a href="#impl-circuit-for-mycircuit">impl Circuit for MyCircuit</a>
+<ul>
+<li><a href="#fn-configure">fn configure()</a></li>
+<li><a href="#fn-synthesize">fn synthesize()</a></li>
+</ul>
+</li>
+<li><a href="#tests">tests</a></li>
+<li><a href="#references-">References :</a></li>
+</ul>
+<h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
+<p>本部分是 Jason Morton 对于上一 Chapter 的代码超の详细解释：
+https://github.com/jasonmorton/halo2-examples/blob/master/src/range_check/example1b.rs</p>
+<p>下面一起来看看</p>
+<h3 id="imports"><a class="header" href="#imports">imports</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use ff::{Field, PrimeField};
+use std::marker::PhantomData; // Allows Rust to track types that do not otherwise appear in a struct's fields, here just the field element type
+
+use halo2_proofs::{
+    circuit::{
+        floor_planner::V1,
+        AssignedCell, // a value Value&lt;V&gt; together with its global location as a Cell with region_index, row_offset, and column
+        Layouter,     // layout strategy and accepter struct, a bit like a Writer
+        Value,        // basically an Option&lt;V&gt;, where Some(v) is called known and None is unknown
+    },
+    plonk::{
+        Advice,      // empty struct to mark Advice columns
+        Assigned, // enum Zero, Trivial(F) "does not require inversion to evaluate", or Rational(F, F) "stored as a fraction to enable batch inversion". This is an actual value (wrapped felt)
+        Circuit,  // trait with without_witnesses, configure, and synthesize methods
+        Column, // represents a pre-layout abstract Column. Fields are index: usize and column type.
+        ConstraintSystem, // The container for the actual constraint system; much of the frontend code exists to make it easier to populate this container
+        Constraints, // Iterable with a selector and Constraint s.  Constraints are single polynomial Expressions returned by create gate
+        Error,       // Custom Error type
+        Expression, // Polynomial expression enum, as binary tree, with 5 types of atomic variables v (Constant, Selector, Fixed, Advice, Instance) and combinations -v, v+v, a*v, or v*v.
+        Selector, // (index: usize, simple: bool) column type, w/ index = index of this selector in the ConstraintSystem, simple = "can only be multiplied by Expressions not containing Selectors"
+    },
+    poly::Rotation, // i32 wrapper representing rotation in Lagrange basis
+};
+<span class="boring">}</span></code></pre></pre>
+<ul>
+<li><strong>AssignedCell</strong>：AssignedCell 表示一个与其全局位置相关联的值 <code>Value&lt;V&gt;</code>，该位置定义为 Cell，字段： region_index, row_offset 和 column</li>
+<li><strong>Value</strong>：Value 本质是一个 <code>Option&lt;V&gt;</code> ，其中 Some(v) 被称为 known（已知），而 None 则是 unknown（未知）</li>
+<li><strong>Assigned</strong>：Assigned 是一个 enum 枚举类型，有 <code>Zero, Trivial(F) 和 Rational(F, F)</code> 三个成员。其中
+<ul>
+<li>Trivial(F) “A value that does not require inversion to evaluate.”，</li>
+<li>Rational(F, F) “存储为分数以便进行批量取反 (A value stored as a fraction to enable batch inversion.)” ，这是一个实际的值（wrapped felt）</li>
+</ul>
+</li>
+<li><strong>Circuit</strong>：Circuit 是一个 trait，具有 <em>without_witnesses, configure 和 synthesize</em> 方法</li>
+<li><strong>ConstraintSystem</strong>：ConstraintSystem 是实际约束系统的容器；大部分前端代码的存在都是为了更容易地填充这个容器</li>
+<li><strong>Constraints</strong> ： 提供了一个新的 API 来进行约束</li>
+<li><strong>Expression</strong>：
+<ul>
+<li>Expression 是多项式表达式的枚举类型，表现为二叉树，拥有5种类型的原子变量 v（Constant, Selector, Fixed, Advice, Instance）以及combination <code>-v, v+v, a*v, or v*v.</code></li>
+<li>Low-degree expression representing an identity that must hold over the committed columns.</li>
+</ul>
+</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Config 是您自定义电路的关联类型（仅要求实现 Clone trait）。它没有特定的强制结构，存储所需的任何类型信息
+// A Config is an associated type of your custom circuit (required only to be Clone).  With no particular enforced structure, it stores whatever type information is needed
+
+// to understand the constraint system (number and types of columns, their indices, some flags such as simple/complex selector, etc.).
+// It is a bit like a morphism type in a Monoidal category (domain and codomain), or the row and column labels in a dataframe. Let's call it the FrameType
+// It can be unstructured because it is the Circuit implementer's job to translate this information into the format needed for the Layouter.
+
+#[derive(Clone)]
+struct MyConfig&lt;F: PrimeField, const RANGE: usize&gt; {
+    advice_column: Column&lt;Advice&gt;,  // a marker and index for a Selector
+    q_range_check: Selector,   // similarly a marker and index for a Selector
+    _marker: PhantomData&lt;F&gt;,
+}
+
+// 通常，Config 会有一个 configure 和 assign 方法，它们由 Circuit 的 configure 和 synthesize 方法委托。在这个版本的示例中，我们将直接在电路中放置此逻辑。
+// By convention the Config gets a configure() and assign() method, which are delegated to by the configure and synthesize method of the Circuit.
+// In this version of the example we will put this logic directly in the circuit.
+impl&lt;F: PrimeField, const RANGE: usize&gt; MyConfig&lt;F, RANGE&gt; {}
+
+#[derive(Default)] // Deriving Default calls Default on Value&lt;Assigned&lt;F&gt;&gt; calls impl&lt;V&gt; Default for Value&lt;V&gt; { fn default() -&gt; Self {  Self::unknown()  }}
+                   // which in turn sets value.inner: Option&lt;V&gt; to None
+struct MyCircuit&lt;F: PrimeField, const RANGE: usize&gt; {
+    assigned_value: Value&lt;Assigned&lt;F&gt;&gt;,
+    _marker: PhantomData&lt;F&gt;,
+}
+impl&lt;F: PrimeField, const RANGE: usize&gt; MyCircuit&lt;F, RANGE&gt; {}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="impl-circuit-for-mycircuit"><a class="header" href="#impl-circuit-for-mycircuit">impl Circuit for MyCircuit</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Your Circuit plays several roles and  will be passed to prover and verifier key generation, prove, and verifier.
+// Implementing the Circuit trait requires three functions:
+// 1) Anything special that needs to be done to set it up without witness values (which will be used in p&amp;v key generation), usually just all witness
+//    values are set to None (Remember Value is basically an alias of Option).
+// 2) How to 'configure' it.  This is a bit mysterious because the required trait method configure just returns your custom associated type
+//    Config, which in turn need only be Clone.  So what is happening? If we look at the MockProver code, we see that an empty ConstraintSystem is
+//    created and passed to the configure function as mutable, then an immutable borrow is taken and worked with for the duration:
+//         let mut cs = ConstraintSystem::default();
+//         let config = ConcreteCircuit::configure(&amp;mut cs);
+//         let cs = cs;
+//    Thus it the Circuit's `configure` method that is responsible for all of the contraint system definition.  It could be called compile_constraints.
+<span class="boring">}</span></code></pre></pre>
+<p>电路会扮演多个角色，并且会被传递给 <code>prover</code> 、 <code>verifier</code> 来 进行 key generation, prove, and verify.</p>
+<ul>
+<li><code>without_witnesses</code>  通常在 p&amp;v key generation 期间使用</li>
+<li>How to ‘configure’ it?  如果我们查看 MockProver 代码，我们可以看到创建了一个空的 ConstraintSystem，传递给 <code>configure()</code> 作为可变引用</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>//    Why does the configure method accept an empty constraint system and return the arbitrary Self::Config, after filling the constaint system to its liking?
+//    The config returned by ConcreteCircuit ::configure is used just once in the MockProver:
+//         ConcreteCircuit::FloorPlanner::synthesize(&amp;mut prover, circuit, config, constants)?;
+//    So after setting up the constraints, the Config stores the information about the layout that the floor planner will need to synthesize.
+//
+//    The `configure` function is where we call cs.create_gate() and so on, adding polynomials to the system.  At this point, the variables in these polynomials
+//    are still locally named/scoped, and will be given a global name/scope during layout.
+<span class="boring">}</span></code></pre></pre>
+<p>为什么 configure 方法接受一个空的约束系统，并在填充约束系统后返回任意的 Self::Config？</p>
+<ol>
+<li>ConcreteCircuit::configure 返回的 config 在 MockProver 中只使用一次：</li>
+<li><code>ConcreteCircuit::FloorPlanner::synthesize(&amp;mut prover, circuit, config, constants)?;</code></li>
+<li>因此，在设置约束之后，Config 存储了 floor planner 在合成时需要的布局信息。</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 3) How to synthesize, given the circuit, a provided &amp;mut Layouter and the data passed in the Config.  The synthesize method returns only error information, and
+//    changes state by writing to the Layouter.  Thus the Layouter is like a buffer or Writer to which the final circuit is written.  One will be supplied by the
+//    MockProver below (and variants will be needed during keygen and proving).
+//
+//  Roughly, configure provides the concrete but relative layout, and synthesize combines such blocks and assigns an absolute layout.
+impl&lt;F: PrimeField, const RANGE: usize&gt; Circuit&lt;F&gt; for MyCircuit&lt;F, RANGE&gt; {
+    type Config = MyConfig&lt;F, RANGE&gt;;
+    type FloorPlanner = V1;
+
+    // This boilerplate could be removed by putting it in the Circuit trait and defining the Circuit trait with a bound as Circuit: Default, but that might be annoying too.
+    fn without_witnesses(&amp;self) -&gt; Self {
+        Self::default() // should fill all the Witness Values with None/Unknown.
+    }
+<span class="boring">}</span></code></pre></pre>
+<p>How to synthesize?</p>
+<ul>
+<li>给定电路 Circuit、 <code>&amp;mut Layouter</code> 和在 Config 中传递的数据。synthesize 方法只返回错误信息，并通过写入 Layouter 更改状态。因此，Layouter 就像最终电路被写入的缓冲区或 Writer。</li>
+</ul>
+<p>大致来说，configure 提供了具体但相对的布局，而 synthesize 组合这些块并分配绝对布局。</p>
+<h4 id="fn-configure"><a class="header" href="#fn-configure">fn configure()</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// define the constraints, mutate the provided ConstraintSystem, and output the resulting FrameType
+// 改变(mutate) 提供的 ConstraintSystem，并输出结果的 FrameType
+fn configure(cs: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self::Config {
+	// Create the column marker types. Requests the CS to allocate a new column (giving it a unique cs-global index and incrementing its
+	// 创建列标记类型。请求 CS 分配一个新列（给它一个唯一的 cs-global 索引并增加它的
+	//   num_selectors, num_fixed_columns, num_advice_columns, or num_instance_columns).
+	let advice_column = cs.advice_column();
+	let q_range_check = cs.selector();
+
+	// When we use cs.query_advice or cs.query_selector, we obtain an Expression which is a reference to a cell in the matrix.
+	// 访问 cs.query_advice / query_selector 获得一个 Expression，它是矩阵中一个单元格的引用(reference)
+	//   Expression::Advice {
+	//     query_index: self.meta.query_advice_index(column, at),
+	//     column_index: column.index,
+	//     rotation: at,
+	//   }
+	// Such an a_{ij} or a_{this_row + at, column} can be treated as a symbolic variable and put into a polynomial constraint.
+	// More precisely, this is a relative reference wrt rows. 
+	// 例如 a_{ij} / a_{this_row + at, column} 会被视为一个符号变量，并放入一个多项式约束中。
+	// (这是一个相对于行的相对引用)
+
+	// cs.create_gate takes a function from virtual_cells to contraints, pushing the constraints to the cs's accumulator.  So this puts
+	// (value.clone()) * (1 - value.clone()) * (2 - value.clone()) * ... * (R - 1 - value.clone())
+	// into the constraint list.
+	// 注意 [VirtualCells], 它持有对`ConstraintSystem`的可变引用，存储已查询的选择器/不同类型的列
+	cs.create_gate("range check", |virtual_cells| {
+		let q = virtual_cells.query_selector(q_range_check);
+		let value = virtual_cells.query_advice(advice_column, Rotation::cur());
+
+		// Given a range R and a value v, returns the expression
+		// (v) * (1 - v) * (2 - v) * ... * (R - 1 - v)
+		//  Range Check poly:
+		let rc_polynomial = (1..RANGE).fold(value.clone(), |expr, i| {
+			expr * (Expression::Constant(F::from(i as u64)) - value.clone())
+		});
+
+		Constraints::with_selector(q, [("range check", rc_polynomial)])
+	});
+
+	// The "FrameType"
+	Self::Config {
+		q_range_check,
+		advice_column,
+		_marker: PhantomData,
+	}
+}
+<span class="boring">}</span></code></pre></pre>
+<p><strong>query_selector  &amp;  query_advice</strong></p>
+<ul>
+<li>When we use <code>cs.query_advice</code> or <code>cs.query_selector</code>, we obtain an <em>Expression</em> which is a reference to a cell in the matrix.</li>
+<li>一个 <code>a_{ij}</code> 或 <code>a_{this_row + at, column}</code> 可以被视为一个符号变量，并放入一个多项式约束中。更准确地说，这是一个相对于行的相对引用。</li>
+</ul>
+<h4 id="fn-synthesize"><a class="header" href="#fn-synthesize">fn synthesize()</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn synthesize(
+	&amp;self,
+	config: Self::Config,
+	mut layouter: impl Layouter&lt;F&gt;, // layouter is our 'write buffer' for the circuit
+) -&gt; Result&lt;(), Error&gt; {
+	// From the function docs:
+	// Assign a region of gates to an absolute row number. 将门的 region 分配一个绝对行号。
+	// Inside the closure, the chip may freely use relative offsets; the `Layouter` will
+	// treat these assignments as a single "region" within the circuit. Outside this
+	// closure, the `Layouter` is allowed to optimise as it sees fit.
+	// 闭包内，chip 可以自由使用相对偏移；`Layouter` 会将这些 assignments 视为电路中的单个“region”。
+	// 在闭包外部，`Layouter` 可以根据需要进行优化
+
+	layouter.assign_region(
+		|| "Assign value", // the name of the region
+		|mut region| {
+			let offset = 0;
+
+			// Enable q_range_check. Remember that q_range_check is a label, a Selector. Calling its enable
+			// - calls region.enable_selector(_,q_range_check,offset)  which
+			// - calls enable_selector on the region's RegionLayouter which
+			// - calls enable_selector on its "CS" (actually an Assignment&lt;F&gt; (a trait), and whatever impls that
+			// does the work, for example for MockProver the enable_selector function does some checks and then sets
+			//   self.selectors[selector.0][row] = true;
+			config.q_range_check.enable(&amp;mut region, offset)?;
+
+			// Similarly after indirection calls assign_advice in e.g. the MockProver, which
+			// takes a Value-producing to() and does something like
+			// CellValue::Assigned(to().into_field().evaluate().assign()?);
+			// 类似 MockProver 间接调用 assign_advice, 它接受一个 Value-producing 的 to() (进行赋值)
+			region.assign_advice(
+				|| "value",
+				config.advice_column,
+				offset,
+				|| self.assigned_value,
+			)
+		},
+	)?;
+	Ok(())
+} }
+<span class="boring">}</span></code></pre></pre>
+<h3 id="tests"><a class="header" href="#tests">tests</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[cfg(test)]
+mod tests {
+    use halo2_proofs::{
+        dev::{FailureLocation, MockProver, VerifyFailure},
+        pasta::Fp,
+        plonk::{Any, Circuit},
+    };
+
+    use super::*;
+
+    #[test]
+    fn test_range_check_1() {
+        let k = 4; //2^k rows
+        const RANGE: usize = 8; // 3-bit value
+        let testvalue: u64 = 22;
+
+        // Successful cases
+        for i in 0..RANGE {
+            let circuit = MyCircuit::&lt;Fp, RANGE&gt; {
+                assigned_value: Value::known(Fp::from(i as u64).into()),
+                _marker: PhantomData,
+            };
+
+            // The MockProver arguments are log_2(nrows), the circuit (with advice already assigned), and the instance variables.
+            // The MockProver will need to internally supply a Layouter for the constraint system to be actually written.
+            // k 对应 2^k 行, MockProver 将需要内部提供一个 Layouter，以便实际编写约束系统
+            let prover = MockProver::run(k, &amp;circuit, vec![]).unwrap();
+            prover.assert_satisfied();
+        }
+
+        // Out-of-range `value = 8`
+        {
+            let circuit = MyCircuit::&lt;Fp, RANGE&gt; {
+                assigned_value: Value::known(Fp::from(testvalue).into()),
+                _marker: PhantomData,
+            };
+            let prover = MockProver::run(k, &amp;circuit, vec![]).unwrap();
+            assert_eq!(
+                prover.verify(),
+                Err(vec![VerifyFailure::ConstraintNotSatisfied {
+                    constraint: ((0, "range check").into(), 0, "range check").into(),
+                    location: FailureLocation::InRegion {
+                        region: (0, "Assign value").into(),
+                        offset: 0
+                    },
+                    cell_values: vec![(((Any::Advice, 0).into(), 0).into(), "0x16".to_string())]
+                }])
+            );
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="references-"><a class="header" href="#references-">References :</a></h3>
+<ul>
+<li>https://github.com/enricobottazzi/halo2-intro/blob/master/src/range_check/example5/table.rs</li>
+<li><a href="https://github.com/jasonmorton/halo2-examples/blob/master/src/fibonacci/example1.rs">Jason Morton halo2 codes</a></li>
+<li><a href="https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation">ZCash halo2 books</a></li>
+<li><a href="https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html">trapdoor-tech halo2 book</a></li>
+<li><a href="https://github.com/icemelon/halo2-examples/blob/master/src/fibonacci/example3.rs">icemelon/HaiCheng Shen</a></li>
+<li><a href="https://learn.0xparc.org/">0xPARC halo2</a></li>
+</ul>
+<footer id="open-on-gh">Found a bug?! <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/halo2/tmp/6-Range-Check(code-explanation).md">Edit this page on GitHub.</a></footer>
+                        <hr>
+                        <div class="giscus"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../halo2/tmp/5-Range-check.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../halo2/tmp/7-Range-Check-lookup(example-2).html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../halo2/tmp/5-Range-check.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../halo2/tmp/7-Range-Check-lookup(example-2).html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/mermaid.min.js"></script>
+        <script src="../../theme/mermaid-init.js"></script>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var langs = [
+            'cn',
+            'en',
+        ];
+
+        (function initLangs() {
+            var html = document.querySelector('html');
+            var langToggleButton = document.getElementById('lang-toggle');
+            var langPopup = document.getElementById('lang-list');
+
+            function showLangs() {
+                langPopup.style.display = 'block';
+                langToggleButton.setAttribute('aria-expanded', true);
+            }
+
+            function hideLangs() {
+                langPopup.style.display = 'none';
+                langToggleButton.setAttribute('aria-expanded', false);
+                langToggleButton.focus();
+            }
+
+            langToggleButton.addEventListener('click', function () {
+                if (langPopup.style.display === 'block') {
+                    hideLangs();
+                } else {
+                    showLangs();
+                }
+            });
+
+            langPopup.addEventListener('focusout', function(e) {
+                // e.relatedTarget is null in Safari and Firefox on macOS (see workaround below)
+                if (!!e.relatedTarget && !langToggleButton.contains(e.relatedTarget) && !langPopup.contains(e.relatedTarget)) {
+                    hideLangs();
+                }
+            });
+
+            // Should not be needed, but it works around an issue on macOS & iOS: https://github.com/rust-lang-nursery/mdBook/issues/628
+            document.addEventListener('click', function(e) {
+                if (langPopup.style.display === 'block' && !langToggleButton.contains(e.target) && !langPopup.contains(e.target)) {
+                    hideLangs();
+                }
+            });
+
+            // For each language, update the link to point to the current page in that language
+            let linkParts = window.location.pathname.split('/');
+            let langIndex = linkParts.findIndex((s) => langs.includes(s));
+            langs.forEach(function (lang) {
+                var link = document.getElementById('lang-' + lang);
+                if (!link) {
+                    return;
+                }
+
+                let newLinkParts = linkParts.slice();
+
+                // If it is Chinese, remove the current language from the path
+                if (lang === "cn") {
+                    if (langIndex !== -1) {
+                        newLinkParts.splice(langIndex, 1);
+                    }
+                }
+                
+                // Otherwise, add the new language to the path
+                else {
+                    if (langIndex === -1) {
+                        // Modify this line to insert the language right after the domain
+                        newLinkParts.splice(1, 0, lang);
+                    } else {
+                        newLinkParts[langIndex] = lang;
+                    }
+                }
+
+                link.href = newLinkParts.join('/');
+            });
+        })();
+
+        </script>
+        <script src="https://giscus.app/client.js"
+                data-repo="zkp-co-learning/zkp-co-learning.github.io"
+                data-repo-id="R_kgDOKNpxMQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOKNpxMc4CZ2LA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </body>
+</html>
